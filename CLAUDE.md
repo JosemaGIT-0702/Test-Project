@@ -76,15 +76,9 @@ in that order; a later script may consume anything an earlier one wrote.
 8. **Indent with tabs** in all code, LaTeX and JSON (`.editorconfig`); spaces only to align
    within a line. Exceptions: YAML and Markdown (spaces), vendored/INSPIRE files.
 
-## The example
-
-The template ships with arXiv:2605.16168 as a worked example (scripts `01`-`05`, all
-`paper/sections`). `/init-project` removes it; until then, use it as the reference for
-how a calculation, its checks and its exports look.
-
 ## Skills (`.claude/skills/`)
 
-`/init-project` set up a fresh copy of the template · `/new-calc` scaffold a calculation ·
+`/new-calc` scaffold a calculation ·
 `/verify` cross-check a derivation · `/build-paper` compile and fix · `/sync-results`
 regenerate everything and check consistency · `/add-reference` INSPIRE BibTeX ·
 `/referee` critical review of the draft · `/log` update the research log.

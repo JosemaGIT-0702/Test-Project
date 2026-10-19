@@ -29,7 +29,7 @@ paths:
   (contexts are resolved when a definition is read).
 - Definitions shared by several scripts of one project (ansätze, superpotentials, model
   parameters) go in a project package in `packages/`, not copied between scripts.
-- Use the symbol names from `notes/conventions.md` (`r`, `u`, `L`, `eta`, ...) so
+- Use the symbol names from `notes/conventions.md` (`r`, `u`, `L`, `phi`, ...) so
   `hepcalc.bridge` can parse exported expressions with sympy.
 - Outputs only through `ExportAnalytic[name, expr]` and `ExportValues[name, <|...|>]`.
   Value keys are letters only (they become `\val<Key>` LaTeX macros) and must be unique project-wide.

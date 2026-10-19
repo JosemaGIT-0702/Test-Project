@@ -1,6 +1,0 @@
-{
-	"name":"warp_ex5_r",
-	"mathematica":"2*2^(1\/3)*Cosh[r\/L]*Cosh[(3*r)\/L]^(1\/3)",
-	"tex":"2 \\sqrt[3]{2} \\cosh \\left(\\frac{r}{L}\\right) \\sqrt[3]{\\cosh \\left(\\frac{3 r}{L}\\right)}",
-	"generated":"2026-10-16T14:57:11"
-}

@@ -1,6 +1,0 @@
-{
-	"name":"warp_ex2",
-	"mathematica":"4*Cosh[u]^2",
-	"tex":"4 \\cosh ^2(u)",
-	"generated":"2026-10-16T14:57:11"
-}

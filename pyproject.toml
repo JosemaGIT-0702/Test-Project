@@ -1,5 +1,5 @@
 [project]
-name = "hepcalc"
+name = "test-project"
 version = "0.1.0"
 description = "Numerical and analytic calculations for this project"
 requires-python = ">=3.11"
