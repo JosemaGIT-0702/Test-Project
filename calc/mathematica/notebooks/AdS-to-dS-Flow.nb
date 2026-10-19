@@ -1,0 +1,3042 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Quit", "[", "]"}], ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Preamble", "Chapter"],
+
+Cell["\<\
+We set up the ansatz of our metric and our potential for a general AdS length \
+(L)\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"coord", "=", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "\[Rho]", ",", "x", ",", "y"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"metric", "=", 
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {
+       RowBox[{
+        RowBox[{"-", 
+         RowBox[{"f", "[", "\[Rho]", "]"}]}], 
+        RowBox[{"Exp", "[", 
+         RowBox[{"2", 
+          RowBox[{"A", "[", "\[Rho]", "]"}]}], "]"}]}], "0", "0", "0"},
+      {"0", 
+       FractionBox["1", 
+        RowBox[{"f", "[", "\[Rho]", "]"}]], "0", "0"},
+      {"0", "0", 
+       RowBox[{"Exp", "[", 
+        RowBox[{"2", 
+         RowBox[{"A", "[", "\[Rho]", "]"}]}], "]"}], "0"},
+      {"0", "0", "0", 
+       RowBox[{"Exp", "[", 
+        RowBox[{"2", 
+         RowBox[{"A", "[", "\[Rho]", "]"}]}], "]"}]}
+     }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"V", "[", "\[Eta]_", "]"}], "=", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"\[IndentingNewLine]", "6"}], 
+      SuperscriptBox["L", "2"]]}], 
+    RowBox[{"Cos", "[", 
+     FractionBox["\[Eta]", 
+      SqrtBox["3"]], "]"}]}]}], ";"}]}], "Input"],
+
+Cell["We load our GR package", "Text"],
+
+Cell[BoxData[
+ RowBox[{"<<", 
+  "/Users/StringAndComp/Downloads/Repos/SuperGrav/supergrav.wl"}]], "Input"],
+
+Cell["We load our general Utilities package", "Text"],
+
+Cell[BoxData[
+ RowBox[{"<<", 
+  "/Users/StringAndComp/Downloads/Repos/MyBasics/MyBasics.wl"}]], "Input"],
+
+Cell["We obtain the equations of motion", "Text"],
+
+Cell[BoxData[{
+ RowBox[{"EinsteinEq", "=", 
+  RowBox[{"RicciTensor", "+", 
+   RowBox[{
+    FractionBox["1", "2"], 
+    RowBox[{"TensorProduct", "[", 
+     RowBox[{
+      RowBox[{"partial", "[", 
+       RowBox[{"\[Eta]", "[", "\[Rho]", "]"}], "]"}], ",", 
+      RowBox[{"partial", "[", 
+       RowBox[{"\[Eta]", "[", "\[Rho]", "]"}], "]"}]}], "]"}]}], "-", 
+   RowBox[{
+    FractionBox["1", "2"], "metric", "*", 
+    RowBox[{"V", "[", 
+     RowBox[{"\[Eta]", "[", "\[Rho]", "]"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"ScalarEq", "=", 
+  RowBox[{
+   RowBox[{"scalarLaplacian", "[", 
+    RowBox[{"\[Eta]", "[", "\[Rho]", "]"}], "]"}], "+", 
+   RowBox[{
+    RowBox[{"V", "'"}], "[", 
+    RowBox[{"\[Eta]", "[", "\[Rho]", "]"}], "]"}]}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"Einsteintt", "=", 
+  RowBox[{
+   RowBox[{"2", 
+    FractionBox["1", 
+     RowBox[{"f", "[", "\[Rho]", "]"}]], 
+    RowBox[{"Exp", "[", 
+     RowBox[{
+      RowBox[{"-", "2"}], 
+      RowBox[{"A", "[", "\[Rho]", "]"}]}], "]"}], 
+    RowBox[{"EinsteinEq", "[", 
+     RowBox[{"[", 
+      RowBox[{"t", ",", "t"}], "]"}], "]"}]}], "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Einstein\[Rho]\[Rho]", "=", 
+  RowBox[{
+   RowBox[{"2", 
+    RowBox[{"f", "[", "\[Rho]", "]"}], 
+    RowBox[{"EinsteinEq", "[", 
+     RowBox[{"[", 
+      RowBox[{"\[Rho]", ",", "\[Rho]"}], "]"}], "]"}]}], "//", 
+   "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Einsteinxx", "=", 
+  RowBox[{
+   RowBox[{"2", 
+    RowBox[{"Exp", "[", 
+     RowBox[{
+      RowBox[{"-", "2"}], 
+      RowBox[{"A", "[", "\[Rho]", "]"}]}], "]"}], 
+    RowBox[{"EinsteinEq", "[", 
+     RowBox[{"[", 
+      RowBox[{"x", ",", "x"}], "]"}], "]"}]}], "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Einsteinyy", "=", 
+  RowBox[{
+   RowBox[{"2", 
+    RowBox[{"Exp", "[", 
+     RowBox[{
+      RowBox[{"-", "2"}], 
+      RowBox[{"A", "[", "\[Rho]", "]"}]}], "]"}], 
+    RowBox[{"EinsteinEq", "[", 
+     RowBox[{"[", 
+      RowBox[{"y", ",", "y"}], "]"}], "]"}]}], "//", 
+   "FullSimplify"}]}]}], "Input"],
+
+Cell["We simplify these 5 equations into 4 independent ones", "Text"],
+
+Cell[BoxData[{
+ RowBox[{"Eq1", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox["1", 
+      RowBox[{"f", "[", "\[Rho]", "]"}]]}], 
+    RowBox[{"(", 
+     RowBox[{"Einsteintt", "+", "Einstein\[Rho]\[Rho]"}], ")"}]}], "//", 
+   "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Eq2", "=", 
+  RowBox[{
+   RowBox[{"Einsteintt", "+", "Einsteinxx"}], "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Eq3", "=", 
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"(", 
+     RowBox[{"Einsteinxx", "+", "Einstein\[Rho]\[Rho]", "+", "Einsteintt"}], 
+     ")"}]}], "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Eq4", "=", 
+  RowBox[{
+   FractionBox["ScalarEq", 
+    RowBox[{"f", "[", "\[Rho]", "]"}]], "//", "FullSimplify"}]}]}], "Input"],
+
+Cell["\<\
+The second equation is a exact derivative that gives us a constant of motion\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"D", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Exp", "[", 
+      RowBox[{"3", 
+       RowBox[{"A", "[", "\[Rho]", "]"}]}], "]"}], 
+     RowBox[{
+      RowBox[{"f", "'"}], "[", "\[Rho]", "]"}]}], ",", "\[Rho]"}], "]"}], "//",
+   "Simplify"}]], "Input"],
+
+Cell["We use equation 1 to turn equation 3 into a constraint", "Text"],
+
+Cell[BoxData[{
+ RowBox[{"AintoEta", "=", 
+  RowBox[{
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"Eq1", "==", "0"}], ",", 
+     RowBox[{
+      RowBox[{"A", "''"}], "[", "\[Rho]", "]"}]}], "]"}], "//", 
+   "Flatten"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Constraint", "=", 
+  RowBox[{"Eq3", "/.", "AintoEta"}]}]}], "Input"],
+
+Cell["We make a consistency check", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Eq1", "==", "0"}], ",", 
+       RowBox[{"Eq2", "==", "0"}], ",", 
+       RowBox[{"Eq4", "==", "0"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "''"}], "[", "\[Rho]", "]"}], ",", 
+       RowBox[{
+        RowBox[{"A", "''"}], "[", "\[Rho]", "]"}], ",", 
+       RowBox[{
+        RowBox[{"\[Eta]", "''"}], "[", "\[Rho]", "]"}]}], "}"}]}], "]"}], "//",
+    "Flatten"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"D", "[", 
+    RowBox[{"Constraint", ",", "\[Rho]"}], "]"}], "/.", "%"}], "//", 
+  "Simplify"}]}], "Input"]}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Resolution", "Chapter"],
+
+Cell[CellGroupData[{
+
+Cell["Global Equation", "Section"],
+
+Cell[TextData[{
+ "We change into a compact variable: ",
+ Cell[BoxData[
+  RowBox[{"\[Rho]", "=", 
+   RowBox[{"\[Rho]h", "+", 
+    RowBox[{"L", " ", 
+     RowBox[{"Log", "[", 
+      FractionBox[
+       RowBox[{"1", "+", "z"}], 
+       RowBox[{"1", "-", "z"}]], "]"}]}]}]}]]]
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Assuming", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"L", ">", "0"}], ",", 
+      RowBox[{"\[Rho]", "\[Element]", "Reals"}], ",", 
+      RowBox[{"\[Rho]h", "\[Element]", "Reals"}]}], "}"}], ",", 
+    RowBox[{"Solve", "[", 
+     RowBox[{
+      RowBox[{"\[Rho]", "==", 
+       RowBox[{"\[Rho]h", "+", 
+        RowBox[{"L", " ", 
+         RowBox[{"Log", "[", 
+          FractionBox[
+           RowBox[{"1", "+", "z"}], 
+           RowBox[{"1", "-", "z"}]], "]"}]}]}]}], ",", "z"}], "]"}]}], "]"}], 
+  "//", "Flatten"}]], "Input"],
+
+Cell[TextData[{
+ "In all of our cases we are going to consider ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Rho]h", "=", "0"}], TraditionalForm]],
+  FormatType->TraditionalForm]
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"CompactVariableTrans", "=", 
+   RowBox[{"{", 
+    RowBox[{"\[Rho]", "->", 
+     RowBox[{"L", " ", 
+      RowBox[{"Log", "[", 
+       FractionBox[
+        RowBox[{"1", "+", "z"}], 
+        RowBox[{"1", "-", "z"}]], "]"}]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"CompactVariableFunc", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\[Eta]", "->", 
+      RowBox[{"Function", "[", 
+       RowBox[{"\[Rho]", ",", 
+        RowBox[{"\[Eta]", "[", 
+         FractionBox[
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", 
+            FractionBox["\[Rho]", "L"]], "-", "1"}], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", 
+            FractionBox["\[Rho]", "L"]], "+", "1"}]], "]"}]}], "]"}]}], ",", 
+     RowBox[{"f", "->", 
+      RowBox[{"Function", "[", 
+       RowBox[{"\[Rho]", ",", 
+        RowBox[{"f", "[", 
+         FractionBox[
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", 
+            FractionBox["\[Rho]", "L"]], "-", "1"}], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", 
+            FractionBox["\[Rho]", "L"]], "+", "1"}]], "]"}]}], "]"}]}], ",", 
+     RowBox[{"A", "->", 
+      RowBox[{"Function", "[", 
+       RowBox[{"\[Rho]", ",", 
+        RowBox[{"A", "[", 
+         FractionBox[
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", 
+            FractionBox["\[Rho]", "L"]], "-", "1"}], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", 
+            FractionBox["\[Rho]", "L"]], "+", "1"}]], "]"}]}], "]"}]}]}], 
+    "}"}]}], ";"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"CompactEq1", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Eq1", "/.", "CompactVariableFunc"}], "/.", 
+    "CompactVariableTrans"}], "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"CompactEq2", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Eq2", "/.", "CompactVariableFunc"}], "/.", 
+    "CompactVariableTrans"}], "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"CompactConstraint", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Constraint", "/.", "CompactVariableFunc"}], "/.", 
+    "CompactVariableTrans"}], "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"CompactEq4", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", "\[Rho]", "]"}], "Eq4"}], "/.", 
+     "CompactVariableFunc"}], "/.", "CompactVariableTrans"}], "//", 
+   "FullSimplify"}]}]}], "Input"],
+
+Cell["After some clearing, these are the final equations", "Text"],
+
+Cell[BoxData[{
+ RowBox[{"FinalEq1", "=", 
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"CompactEq1", "/", 
+     RowBox[{"Coefficient", "[", 
+      RowBox[{"CompactEq1", ",", 
+       RowBox[{
+        RowBox[{"A", "''"}], "[", "z", "]"}]}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"A", "''"}], "[", "z", "]"}], ",", 
+      RowBox[{
+       RowBox[{"A", "'"}], "[", "z", "]"}]}], "}"}], ",", "Simplify"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"FinalEq2", "=", 
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"CompactEq2", "/", 
+     RowBox[{"Coefficient", "[", 
+      RowBox[{"CompactEq2", ",", 
+       RowBox[{
+        RowBox[{"f", "''"}], "[", "z", "]"}]}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"f", "''"}], "[", "z", "]"}], ",", 
+      RowBox[{
+       RowBox[{"f", "'"}], "[", "z", "]"}]}], "}"}], ",", "Simplify"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"FinalConstraint", "=", 
+  RowBox[{"CompactConstraint", "*", "8", 
+   SuperscriptBox["L", "2"]}]}], "\[IndentingNewLine]", 
+ RowBox[{"FinalEq4", "=", 
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"CompactEq4", "/", 
+     RowBox[{"Coefficient", "[", 
+      RowBox[{"CompactEq4", ",", 
+       RowBox[{
+        RowBox[{"\[Eta]", "''"}], "[", "z", "]"}]}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Eta]", "''"}], "[", "z", "]"}], ",", 
+      RowBox[{
+       RowBox[{"\[Eta]", "'"}], "[", "z", "]"}]}], "}"}], ",", "Simplify"}], 
+   "]"}]}]}], "Input"]}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Around AdS Boundary (z=-1)", "Section"],
+
+Cell["\<\
+We analyze the asymptotic behavior of our equations around z=-1 (i.e \[Rho] \
+\[LongRightArrow] -\[Infinity])\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"CoeffA", "=", 
+   RowBox[{
+    RowBox[{"Series", "[", 
+     RowBox[{
+      RowBox[{"Coefficient", "[", 
+       RowBox[{"FinalEq1", ",", 
+        RowBox[{
+         RowBox[{"A", "'"}], "[", "z", "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], "]"}], "//", "Normal"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DSolve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"A", "''"}], "[", "z", "]"}], "+", 
+        RowBox[{"CoeffA", "*", 
+         RowBox[{
+          RowBox[{"A", "'"}], "[", "z", "]"}]}]}], "==", "0"}], ",", 
+      RowBox[{"A", "[", "z", "]"}], ",", "z"}], "]"}], "/.", 
+    RowBox[{
+     TemplateBox[{"2"},
+      "C"], "->", "a0"}]}], "/.", 
+   RowBox[{
+    TemplateBox[{"1"},
+     "C"], "->", 
+    RowBox[{"-", "1"}]}]}], "//", "Flatten"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"a0", "-", 
+     RowBox[{"Log", "[", 
+      RowBox[{"1", "+", "z"}], "]"}]}], "/.", 
+    RowBox[{"z", "\[Rule]", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"-", "1"}], "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}], 
+      RowBox[{"1", "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}]]}]}], "//", 
+   "FullSimplify"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Assuming", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\[Rho]", "\[Element]", "Reals"}], ",", 
+     RowBox[{"\[Rho]h", "\[Element]", "Reals"}], ",", 
+     RowBox[{"L", ">", "0"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Normal", "[", 
+       RowBox[{"Series", "[", 
+        RowBox[{
+         RowBox[{"%", "/.", 
+          RowBox[{"\[Rho]", "->", 
+           RowBox[{"L", " ", 
+            RowBox[{"Log", "[", "x", "]"}]}]}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "0", ",", "2"}], "}"}]}], "]"}], "]"}], "/.", 
+      RowBox[{"x", "->", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox["\[Rho]", "L"]]}]}], "/.", 
+     RowBox[{"a0", "->", 
+      RowBox[{
+       RowBox[{"Log", "[", "2", "]"}], "+", "a0"}]}]}], "//", 
+    "FullSimplify"}]}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Coefff", "=", 
+   RowBox[{
+    RowBox[{"Series", "[", 
+     RowBox[{
+      RowBox[{"Coefficient", "[", 
+       RowBox[{
+        RowBox[{"FinalEq2", "/.", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"A", "'"}], "[", "z", "]"}], "->", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"a0", "-", 
+             RowBox[{"Log", "[", 
+              RowBox[{"1", "+", "z"}], "]"}]}], ",", "z"}], "]"}]}]}], ",", 
+        RowBox[{
+         RowBox[{"f", "'"}], "[", "z", "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], "]"}], "//", "Normal"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DSolve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"f", "''"}], "[", "z", "]"}], "+", 
+        RowBox[{"Coefff", "*", 
+         RowBox[{
+          RowBox[{"f", "'"}], "[", "z", "]"}]}]}], "==", "0"}], ",", 
+      RowBox[{"f", "[", "z", "]"}], ",", "z"}], "]"}], "/.", 
+    RowBox[{
+     TemplateBox[{"2"},
+      "C"], "->", 
+     RowBox[{
+      RowBox[{
+       FractionBox["1", "3"], 
+       TemplateBox[{"1"},
+        "C"]}], "+", 
+      TemplateBox[{"2"},
+       "C"]}]}]}], "//", "FullSimplify"}], "//", "Flatten"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      FractionBox["f3", "3"], 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "+", "z"}], ")"}], "3"]}], "+", "f1"}], "/.", 
+    RowBox[{"z", "\[Rule]", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"-", "1"}], "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}], 
+      RowBox[{"1", "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}]]}]}], "//", "Simplify"}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Normal", "[", 
+     RowBox[{"Series", "[", 
+      RowBox[{
+       RowBox[{"%", "/.", 
+        RowBox[{"\[Rho]", "->", 
+         RowBox[{"L", " ", 
+          RowBox[{"Log", "[", "x", "]"}]}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", "4"}], "}"}]}], "]"}], "]"}], "/.", 
+    RowBox[{"x", "->", 
+     RowBox[{"Exp", "[", 
+      FractionBox["\[Rho]", "L"], "]"}]}]}], "/.", 
+   RowBox[{"f3", "->", 
+    RowBox[{
+     FractionBox["3", "8"], "f3"}]}]}], "//", "FullSimplify"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"CoefEtaPrime", "=", 
+   RowBox[{
+    RowBox[{"Series", "[", 
+     RowBox[{
+      RowBox[{"Coefficient", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"FinalEq4", "/.", 
+          RowBox[{
+           RowBox[{"Sin", "[", 
+            FractionBox[
+             RowBox[{"\[Eta]", "[", "z", "]"}], 
+             SqrtBox["3"]], "]"}], "->", 
+           RowBox[{"Normal", "[", 
+            RowBox[{"Series", "[", 
+             RowBox[{
+              RowBox[{"Sin", "[", 
+               FractionBox[
+                RowBox[{"\[Eta]", "[", "z", "]"}], 
+                SqrtBox["3"]], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"\[Eta]", "[", "z", "]"}], ",", "0", ",", "1"}], 
+               "}"}]}], "]"}], "]"}]}]}], "/.", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"A", "'"}], "[", "z", "]"}], "->", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"a", "-", 
+             RowBox[{"Log", "[", 
+              RowBox[{"1", "+", "z"}], "]"}]}], ",", "z"}], "]"}]}]}], ",", 
+        RowBox[{
+         RowBox[{"\[Eta]", "'"}], "[", "z", "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], "]"}], "//", "Normal"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"CoefEta", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{
+       RowBox[{"Coefficient", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"FinalEq4", "/.", 
+           RowBox[{
+            RowBox[{"Sin", "[", 
+             FractionBox[
+              RowBox[{"\[Eta]", "[", "z", "]"}], 
+              SqrtBox["3"]], "]"}], "->", 
+            RowBox[{"Normal", "[", 
+             RowBox[{"Series", "[", 
+              RowBox[{
+               RowBox[{"Sin", "[", 
+                FractionBox[
+                 RowBox[{"\[Eta]", "[", "z", "]"}], 
+                 SqrtBox["3"]], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"\[Eta]", "[", "z", "]"}], ",", "0", ",", "1"}], 
+                "}"}]}], "]"}], "]"}]}]}], "/.", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"A", "'"}], "[", "z", "]"}], "->", 
+           RowBox[{"D", "[", 
+            RowBox[{
+             RowBox[{"a", "-", 
+              RowBox[{"Log", "[", 
+               RowBox[{"1", "+", "z"}], "]"}]}], ",", "z"}], "]"}]}]}], ",", 
+         RowBox[{"\[Eta]", "[", "z", "]"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", 
+         RowBox[{"-", "1"}], ",", 
+         RowBox[{"-", "2"}]}], "}"}]}], "]"}], "/.", 
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{"-", "1"}], "]"}], "->", "1"}]}], "//", "Normal"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DSolve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Eta]", "''"}], "[", "z", "]"}], "+", 
+      RowBox[{"CoefEtaPrime", "*", 
+       RowBox[{
+        RowBox[{"\[Eta]", "'"}], "[", "z", "]"}]}], "+", 
+      RowBox[{"CoefEta", "*", 
+       RowBox[{"\[Eta]", "[", "z", "]"}]}]}], "==", "0"}], ",", 
+    RowBox[{"\[Eta]", "[", "z", "]"}], ",", "z"}], "]"}], "//", 
+  "Flatten"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", "z"}], ")"}], " ", 
+      TemplateBox[{"1"},
+       "C"]}], "+", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "+", "z"}], ")"}], "2"], " ", 
+      TemplateBox[{"2"},
+       "C"]}]}], "/.", 
+    RowBox[{"z", "\[Rule]", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"-", "1"}], "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}], 
+      RowBox[{"1", "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}]]}]}], "//", 
+   "FullSimplify"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Normal", "[", 
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"%", "/.", 
+      RowBox[{"\[Rho]", "->", 
+       RowBox[{"L", " ", 
+        RowBox[{"Log", "[", "x", "]"}]}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "3"}], "}"}]}], "]"}], "]"}], "/.", 
+  RowBox[{"x", "->", 
+   RowBox[{"Exp", "[", 
+    FractionBox["\[Rho]", "L"], "]"}]}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"FinalConstraint", "/.", 
+       RowBox[{
+        RowBox[{"Cos", "[", 
+         FractionBox[
+          RowBox[{"\[Eta]", "[", "z", "]"}], 
+          SqrtBox["3"]], "]"}], "->", 
+        RowBox[{"Normal", "[", 
+         RowBox[{"Series", "[", 
+          RowBox[{
+           RowBox[{"Cos", "[", 
+            FractionBox[
+             RowBox[{"\[Eta]", "[", "z", "]"}], 
+             SqrtBox["3"]], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\[Eta]", "[", "z", "]"}], ",", "0", ",", "2"}], "}"}]}],
+           "]"}], "]"}]}]}], "/.", 
+      RowBox[{"f", "->", 
+       RowBox[{"Function", "[", 
+        RowBox[{"z", ",", 
+         RowBox[{
+          RowBox[{
+           FractionBox["1", "3"], " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"1", "+", "z"}], ")"}], "3"], " ", "f3"}], "+", "f1"}]}],
+         "]"}]}]}], "/.", 
+     RowBox[{"\[Eta]", "->", 
+      RowBox[{"Function", "[", 
+       RowBox[{"z", ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"1", "+", "z"}], ")"}], "\[Eta]1"}], "+", 
+         RowBox[{
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"1", "+", "z"}], ")"}], "2"], "\[Eta]2"}]}]}], "]"}]}]}], 
+    "/.", 
+    RowBox[{"A", "->", 
+     RowBox[{"Function", "[", 
+      RowBox[{"z", ",", 
+       RowBox[{"a0", "-", 
+        RowBox[{"Log", "[", 
+         RowBox[{"1", "+", "z"}], "]"}]}]}], "]"}]}]}], "//", "ExpandAll"}], "//",
+   "FullSimplify"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Normal", "[", 
+      RowBox[{"Series", "[", 
+       RowBox[{"%", ",", 
+        RowBox[{"{", 
+         RowBox[{"z", ",", 
+          RowBox[{"-", "1"}], ",", "0"}], "}"}]}], "]"}], "]"}], "==", "0"}], 
+    ",", "f1"}], "]"}], "//", "Flatten"}]}], "Input"]}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Around dS Future (z=1)", "Section"],
+
+Cell["\<\
+We analyze the asymptotic behavior of our equations around z=1 (i.e \[Rho] \
+\[LongRightArrow] +\[Infinity])\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"Coefficient", "[", 
+      RowBox[{"FinalEq1", ",", 
+       RowBox[{
+        RowBox[{"A", "'"}], "[", "z", "]"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", "1", ",", 
+       RowBox[{"-", "1"}]}], "}"}]}], "]"}], "//", "Normal"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DSolve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"A", "''"}], "[", "z", "]"}], "+", 
+        RowBox[{"%", 
+         RowBox[{
+          RowBox[{"A", "'"}], "[", "z", "]"}]}]}], "==", "0"}], ",", 
+      RowBox[{"A", "[", "z", "]"}], ",", "z"}], "]"}], "/.", 
+    RowBox[{
+     TemplateBox[{"2"},
+      "C"], "->", "a0"}]}], "/.", 
+   RowBox[{
+    TemplateBox[{"1"},
+     "C"], "->", "1"}]}], "//", "Flatten"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"a0", "-", 
+     RowBox[{"Log", "[", 
+      RowBox[{"1", "-", "z"}], "]"}]}], "/.", 
+    RowBox[{"z", "\[Rule]", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"-", "1"}], "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}], 
+      RowBox[{"1", "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}]]}]}], "//", 
+   "FullSimplify"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Assuming", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\[Rho]", "\[Element]", "Reals"}], ",", 
+     RowBox[{"\[Rho]h", "\[Element]", "Reals"}], ",", 
+     RowBox[{"L", ">", "0"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Normal", "[", 
+       RowBox[{"Series", "[", 
+        RowBox[{
+         RowBox[{"%", "/.", 
+          RowBox[{"\[Rho]", "->", 
+           RowBox[{"L", " ", 
+            RowBox[{"Log", "[", "x", "]"}]}]}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", 
+           RowBox[{"+", "\[Infinity]"}], ",", "2"}], "}"}]}], "]"}], "]"}], "/.", 
+      RowBox[{"x", "->", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox["\[Rho]", "L"]]}]}], "/.", 
+     RowBox[{"a0", "->", 
+      RowBox[{
+       RowBox[{"Log", "[", "2", "]"}], "+", "a0"}]}]}], "//", 
+    "FullSimplify"}]}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Coefficient", "[", 
+     RowBox[{
+      RowBox[{"FinalEq2", "/.", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"A", "'"}], "[", "z", "]"}], "->", 
+        RowBox[{"D", "[", 
+         RowBox[{
+          RowBox[{"a0", "-", 
+           RowBox[{"Log", "[", 
+            RowBox[{"1", "-", "z"}], "]"}]}], ",", "z"}], "]"}]}]}], ",", 
+      RowBox[{
+       RowBox[{"f", "'"}], "[", "z", "]"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"z", ",", "1", ",", 
+      RowBox[{"-", "1"}]}], "}"}]}], "]"}], "//", "Normal"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DSolve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"f", "''"}], "[", "z", "]"}], "+", 
+        RowBox[{"%", 
+         RowBox[{
+          RowBox[{"f", "'"}], "[", "z", "]"}]}]}], "==", "0"}], ",", 
+      RowBox[{"f", "[", "z", "]"}], ",", "z"}], "]"}], "/.", 
+    RowBox[{
+     TemplateBox[{"2"},
+      "C"], "->", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", 
+        FractionBox["1", "3"]}], 
+       TemplateBox[{"1"},
+        "C"]}], "+", 
+      TemplateBox[{"2"},
+       "C"]}]}]}], "//", "FullSimplify"}], "//", "Flatten"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     FractionBox["f3", "3"], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", "z"}], ")"}], "3"]}], "+", "f1"}], "/.", 
+   RowBox[{"z", "\[Rule]", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"-", "1"}], "+", 
+      SuperscriptBox["\[ExponentialE]", 
+       FractionBox[
+        RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}], 
+     RowBox[{"1", "+", 
+      SuperscriptBox["\[ExponentialE]", 
+       FractionBox[
+        RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}]]}]}], "//", 
+  "Simplify"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Normal", "[", 
+     RowBox[{"Series", "[", 
+      RowBox[{
+       RowBox[{"%", "/.", 
+        RowBox[{"\[Rho]", "->", 
+         RowBox[{"L", " ", 
+          RowBox[{"Log", "[", "x", "]"}]}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"+", "\[Infinity]"}], ",", "4"}], "}"}]}], "]"}], "]"}], "/.", 
+    RowBox[{"x", "->", 
+     RowBox[{"Exp", "[", 
+      FractionBox["\[Rho]", "L"], "]"}]}]}], "/.", 
+   RowBox[{"f3", "->", 
+    RowBox[{
+     FractionBox["3", "8"], "f3"}]}]}], "//", "FullSimplify"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"CoefEtaPrime", "=", 
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"Coefficient", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"FinalEq4", "/.", 
+         RowBox[{
+          RowBox[{"Sin", "[", 
+           FractionBox[
+            RowBox[{"\[Eta]", "[", "z", "]"}], 
+            SqrtBox["3"]], "]"}], "->", 
+          RowBox[{"Normal", "[", 
+           RowBox[{"Series", "[", 
+            RowBox[{
+             RowBox[{"Sin", "[", 
+              FractionBox[
+               RowBox[{"\[Eta]", "[", "z", "]"}], 
+               SqrtBox["3"]], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"\[Eta]", "[", "z", "]"}], ",", 
+               RowBox[{
+                SqrtBox["3"], "\[Pi]"}], ",", "1"}], "}"}]}], "]"}], 
+           "]"}]}]}], "/.", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"A", "'"}], "[", "z", "]"}], "->", 
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"a0", "-", 
+            RowBox[{"Log", "[", 
+             RowBox[{"1", "-", "z"}], "]"}]}], ",", "z"}], "]"}]}]}], ",", 
+       RowBox[{
+        RowBox[{"\[Eta]", "'"}], "[", "z", "]"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", "1", ",", 
+       RowBox[{"-", "1"}]}], "}"}]}], "]"}], "//", "Normal"}]}], "\[IndentingNewLine]", 
+ RowBox[{"CoefEta", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Series", "[", 
+     RowBox[{
+      RowBox[{"Coefficient", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"FinalEq4", "/.", 
+          RowBox[{
+           RowBox[{"Sin", "[", 
+            FractionBox[
+             RowBox[{"\[Eta]", "[", "z", "]"}], 
+             SqrtBox["3"]], "]"}], "->", 
+           RowBox[{"Normal", "[", 
+            RowBox[{"Series", "[", 
+             RowBox[{
+              RowBox[{"Sin", "[", 
+               FractionBox[
+                RowBox[{"\[Eta]", "[", "z", "]"}], 
+                SqrtBox["3"]], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"\[Eta]", "[", "z", "]"}], ",", 
+                RowBox[{
+                 SqrtBox["3"], "\[Pi]"}], ",", "1"}], "}"}]}], "]"}], 
+            "]"}]}]}], "/.", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"A", "'"}], "[", "z", "]"}], "->", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"a0", "-", 
+             RowBox[{"Log", "[", 
+              RowBox[{"1", "-", "z"}], "]"}]}], ",", "z"}], "]"}]}]}], ",", 
+        RowBox[{"\[Eta]", "[", "z", "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", "1", ",", 
+        RowBox[{"-", "2"}]}], "}"}]}], "]"}], "/.", 
+    RowBox[{
+     RowBox[{"f", "[", "1", "]"}], "->", 
+     RowBox[{"-", "1"}]}]}], "//", "Normal"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DSolve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Eta]", "''"}], "[", "z", "]"}], "+", 
+      RowBox[{"CoefEtaPrime", "*", 
+       RowBox[{
+        RowBox[{"\[Eta]", "'"}], "[", "z", "]"}]}], "+", 
+      RowBox[{"CoefEta", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"\[Eta]", "[", "z", "]"}], "-", 
+         RowBox[{
+          SqrtBox["3"], "\[Pi]"}]}], ")"}]}]}], "==", "0"}], ",", 
+    RowBox[{"\[Eta]", "[", "z", "]"}], ",", "z"}], "]"}], "//", 
+  "Flatten"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      SqrtBox["3"], " ", "\[Pi]"}], "+", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", "z"}], ")"}], " ", 
+      TemplateBox[{"1"},
+       "C"]}], "+", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", "z"}], ")"}], "2"], " ", 
+      TemplateBox[{"2"},
+       "C"]}]}], "/.", 
+    RowBox[{"z", "\[Rule]", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"-", "1"}], "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}], 
+      RowBox[{"1", "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"\[Rho]", "-", "\[Rho]h"}], "L"]]}]]}]}], "//", 
+   "FullSimplify"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Normal", "[", 
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"%", "/.", 
+      RowBox[{"\[Rho]", "->", 
+       RowBox[{"L", " ", 
+        RowBox[{"Log", "[", "x", "]"}]}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"+", "\[Infinity]"}], ",", "3"}], "}"}]}], "]"}], "]"}], "/.", 
+  
+  RowBox[{"x", "->", 
+   RowBox[{"Exp", "[", 
+    FractionBox["\[Rho]", "L"], "]"}]}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"FinalConstraint", "/.", 
+        RowBox[{
+         RowBox[{"Cos", "[", 
+          FractionBox[
+           RowBox[{"\[Eta]", "[", "z", "]"}], 
+           SqrtBox["3"]], "]"}], "->", 
+         RowBox[{"Normal", "[", 
+          RowBox[{"Series", "[", 
+           RowBox[{
+            RowBox[{"Cos", "[", 
+             FractionBox[
+              RowBox[{"\[Eta]", "[", "z", "]"}], 
+              SqrtBox["3"]], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"\[Eta]", "[", "z", "]"}], ",", 
+              RowBox[{
+               SqrtBox["3"], "\[Pi]"}], ",", "2"}], "}"}]}], "]"}], "]"}]}]}],
+        "/.", 
+       RowBox[{"f", "->", 
+        RowBox[{"Function", "[", 
+         RowBox[{"z", ",", 
+          RowBox[{
+           RowBox[{
+            FractionBox["1", "3"], " ", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1"}], "+", "z"}], ")"}], "3"], " ", "f3"}], "+", 
+           "f1"}]}], "]"}]}]}], "/.", 
+      RowBox[{"\[Eta]", "->", 
+       RowBox[{"Function", "[", 
+        RowBox[{"z", ",", 
+         RowBox[{
+          RowBox[{
+           SqrtBox["3"], "\[Pi]"}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "+", "z"}], ")"}], "\[Eta]1"}], "+", 
+          RowBox[{
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"1", "-", "z"}], ")"}], "2"], "\[Eta]2"}]}]}], "]"}]}]}],
+      "/.", 
+     RowBox[{"A", "->", 
+      RowBox[{"Function", "[", 
+       RowBox[{"z", ",", 
+        RowBox[{"a0", "-", 
+         RowBox[{"Log", "[", 
+          RowBox[{"1", "-", "z"}], "]"}]}]}], "]"}]}]}], "//", "ExpandAll"}], 
+   "//", "FullSimplify"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Normal", "[", 
+      RowBox[{"Series", "[", 
+       RowBox[{"%", ",", 
+        RowBox[{"{", 
+         RowBox[{"z", ",", "1", ",", "0"}], "}"}]}], "]"}], "]"}], "==", 
+     "0"}], ",", "f1"}], "]"}], "//", "Flatten"}]}], "Input"]}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Around the Horizon (z=0)", "Section"],
+
+Cell["\<\
+We analyze the asymptotic behavior of our equations around z=0 (i.e \[Rho] \
+=0), so that we can obtain the boundary conditions we need to impose in our \
+resolutions\
+\>", "Text"],
+
+Cell["\<\
+From the form of the Potential we know that for our particular purposes we \
+want:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"InitialConditions", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", "0", "]"}], "->", "0"}], ",", 
+    RowBox[{
+     RowBox[{"\[Eta]", "[", "0", "]"}], "->", 
+     RowBox[{
+      SqrtBox["3"], 
+      FractionBox["\[Pi]", "2"]}]}]}], "}"}]}]], "Input"],
+
+Cell["We start solving each equation order by order.", "Text"],
+
+Cell[BoxData[{
+ RowBox[{"Series0HorizonEq1", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Series", "[", 
+     RowBox[{"FinalEq1", ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", "0", ",", "0"}], "}"}]}], "]"}], "/.", 
+    "InitialConditions"}], "//", "Normal"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series0HorizonEq2", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Series", "[", 
+     RowBox[{"FinalEq2", ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", "0", ",", "0"}], "}"}]}], "]"}], "/.", 
+    "InitialConditions"}], "//", "Normal"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series0HorizonConstraint", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Series", "[", 
+     RowBox[{"FinalConstraint", ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", "0", ",", "0"}], "}"}]}], "]"}], "/.", 
+    "InitialConditions"}], "//", "Normal"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series0HorizonEq4", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Series", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"f", "[", "z", "]"}], "FinalEq4"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", "0", ",", "0"}], "}"}]}], "]"}], "/.", 
+    "InitialConditions"}], "//", "Normal"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ZeroOrderSol", "=", 
+  RowBox[{"Join", "[", 
+   RowBox[{"InitialConditions", ",", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Series0HorizonEq1", "==", "0"}], ",", 
+         RowBox[{"Series0HorizonEq2", "==", "0"}], ",", 
+         RowBox[{"Series0HorizonConstraint", "==", "0"}], ",", 
+         RowBox[{"Series0HorizonEq4", "==", "0"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "''"}], "[", "0", "]"}], ",", 
+         RowBox[{
+          RowBox[{"A", "''"}], "[", "0", "]"}], ",", 
+         RowBox[{
+          RowBox[{"A", "'"}], "[", "0", "]"}], ",", 
+         RowBox[{
+          RowBox[{"\[Eta]", "'"}], "[", "0", "]"}]}], "}"}]}], "]"}], "//", 
+     "Flatten"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"Series1HorizonEq1", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalEq1", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "1"}], "}"}]}], "]"}], "/.", 
+     "ZeroOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series1HorizonEq2", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalEq2", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "1"}], "}"}]}], "]"}], "/.", 
+     "ZeroOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series1HorizonConstraint", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalConstraint", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "1"}], "}"}]}], "]"}], "/.", 
+     "ZeroOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series1HorizonEq4", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "[", "z", "]"}], "FinalEq4"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "1"}], "}"}]}], "]"}], "/.", 
+     "ZeroOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"FirstOrderSol", "=", 
+  RowBox[{"Join", "[", 
+   RowBox[{"ZeroOrderSol", ",", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Series1HorizonEq1", "==", "0"}], ",", 
+         RowBox[{"Series1HorizonEq2", "==", "0"}], ",", 
+         RowBox[{"Series1HorizonEq4", "==", "0"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          SuperscriptBox["A", 
+           TagBox[
+            RowBox[{"(", "3", ")"}],
+            Derivative],
+           MultilineFunction->None], "[", "0", "]"}], ",", 
+         RowBox[{
+          SuperscriptBox["f", 
+           TagBox[
+            RowBox[{"(", "3", ")"}],
+            Derivative],
+           MultilineFunction->None], "[", "0", "]"}], ",", 
+         RowBox[{
+          RowBox[{"\[Eta]", "''"}], "[", "0", "]"}]}], "}"}]}], "]"}], "//", 
+     "Flatten"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"Series2HorizonEq1", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalEq1", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "2"}], "}"}]}], "]"}], "/.", 
+     "FirstOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series2HorizonEq2", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalEq2", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "2"}], "}"}]}], "]"}], "/.", 
+     "FirstOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series2HorizonConstraint", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalConstraint", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "2"}], "}"}]}], "]"}], "/.", 
+     "FirstOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series2HorizonEq4", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "[", "z", "]"}], "FinalEq4"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "2"}], "}"}]}], "]"}], "/.", 
+     "FirstOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"SecondOrderSol", "=", 
+  RowBox[{"Join", "[", 
+   RowBox[{"FirstOrderSol", ",", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Series2HorizonEq1", "==", "0"}], ",", 
+         RowBox[{"Series2HorizonEq2", "==", "0"}], ",", 
+         RowBox[{"Series2HorizonEq4", "==", "0"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          SuperscriptBox["\[Eta]", 
+           TagBox[
+            RowBox[{"(", "3", ")"}],
+            Derivative],
+           MultilineFunction->None], "[", "0", "]"}], ",", 
+         RowBox[{
+          SuperscriptBox["f", 
+           TagBox[
+            RowBox[{"(", "4", ")"}],
+            Derivative],
+           MultilineFunction->None], "[", "0", "]"}], ",", " ", 
+         RowBox[{
+          SuperscriptBox["A", 
+           TagBox[
+            RowBox[{"(", "4", ")"}],
+            Derivative],
+           MultilineFunction->None], "[", "0", "]"}]}], "}"}]}], "]"}], "//", 
+     "Flatten"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"Series3HorizonEq1", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalEq1", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "3"}], "}"}]}], "]"}], "/.", 
+     "SecondOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series3HorizonEq2", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalEq2", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "3"}], "}"}]}], "]"}], "/.", 
+     "SecondOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series3HorizonConstraint", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{"FinalConstraint", ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "3"}], "}"}]}], "]"}], "/.", 
+     "SecondOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Series3HorizonEq4", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Series", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "[", "z", "]"}], "FinalEq4"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", "0", ",", "3"}], "}"}]}], "]"}], "/.", 
+     "SecondOrderSol"}], "//", "Normal"}], "//", "Simplify"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ThirdOrderSol", "=", 
+  RowBox[{"Join", "[", 
+   RowBox[{"SecondOrderSol", ",", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Series3HorizonEq1", "==", "0"}], ",", 
+         RowBox[{"Series3HorizonEq2", "==", "0"}], ",", 
+         RowBox[{"Series3HorizonEq4", "==", "0"}]}], "}"}], ",", 
+       RowBox[{"{", " ", 
+        RowBox[{
+         RowBox[{
+          SuperscriptBox["\[Eta]", 
+           TagBox[
+            RowBox[{"(", "4", ")"}],
+            Derivative],
+           MultilineFunction->None], "[", "0", "]"}], ",", 
+         RowBox[{
+          SuperscriptBox["A", 
+           TagBox[
+            RowBox[{"(", "5", ")"}],
+            Derivative],
+           MultilineFunction->None], "[", "0", "]"}], ",", " ", 
+         RowBox[{
+          SuperscriptBox["f", 
+           TagBox[
+            RowBox[{"(", "5", ")"}],
+            Derivative],
+           MultilineFunction->None], "[", "0", "]"}]}], "}"}]}], "]"}], "//", 
+     "Flatten"}]}], "]"}]}]], "Input"]}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Example of Numerical Solution", "Section"],
+
+Cell["\<\
+We can now use the previous results as the starting point and obtain a \
+numerical solution.\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"f", "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", "0", ",", "5"}], "}"}]}], "]"}], "/.", 
+   "ThirdOrderSol"}], "//", "Normal"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"A", "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", "0", ",", "5"}], "}"}]}], "]"}], "/.", 
+   "ThirdOrderSol"}], "//", "Normal"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"\[Eta]", "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", "0", ",", "4"}], "}"}]}], "]"}], "/.", 
+   "ThirdOrderSol"}], "//", "Normal"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fSeries", "[", "z_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"z", " ", "f1H"}], "+", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["z", "3"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "72"}], "+", 
+       SuperscriptBox["f1H", "2"]}], ")"}]}], 
+    RowBox[{"3", " ", "f1H"}]], "+", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["z", "5"], " ", 
+     RowBox[{"(", 
+      RowBox[{"3424", "-", 
+       RowBox[{"120", " ", 
+        SuperscriptBox["f1H", "2"]}], "+", 
+       SuperscriptBox["f1H", "4"]}], ")"}]}], 
+    RowBox[{"5", " ", 
+     SuperscriptBox["f1H", "3"]}]]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ASeries", "[", "z_", "]"}], ":=", 
+  RowBox[{"AH", "+", 
+   FractionBox[
+    RowBox[{"24", " ", 
+     SuperscriptBox["z", "2"]}], 
+    SuperscriptBox["f1H", "2"]], "+", 
+   FractionBox[
+    RowBox[{"16", " ", 
+     SuperscriptBox["z", "4"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "52"}], "+", 
+       RowBox[{"3", " ", 
+        SuperscriptBox["f1H", "2"]}]}], ")"}]}], 
+    RowBox[{"3", " ", 
+     SuperscriptBox["f1H", "4"]}]]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Eta]Series", "[", "z_", "]"}], ":=", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     SqrtBox["3"], " ", "\[Pi]"}], "2"], "-", 
+   FractionBox[
+    RowBox[{"8", " ", 
+     SqrtBox["3"], " ", "z"}], "f1H"], "-", 
+   FractionBox[
+    RowBox[{"8", " ", 
+     SuperscriptBox["z", "3"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "104"}], "+", 
+       RowBox[{"3", " ", 
+        SuperscriptBox["f1H", "2"]}]}], ")"}]}], 
+    RowBox[{"3", " ", 
+     SqrtBox["3"], " ", 
+     SuperscriptBox["f1H", "3"]}]]}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NumericalSolAdS", "[", 
+   RowBox[{
+    RowBox[{"f1_", "?", "NumericQ"}], ",", 
+    RowBox[{"A0_", "?", "NumericQ"}]}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"\[Epsilon]", "=", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "8"}]]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"NDSolveValue", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"FinalEq1", "==", "0"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"FinalEq2", "==", "0"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"FinalEq4", "==", "0"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"f", "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{"fSeries", "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"f", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{
+           RowBox[{"fSeries", "'"}], "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"\[Eta]", "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{"\[Eta]Series", "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Eta]", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{
+           RowBox[{"\[Eta]Series", "'"}], "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"A", "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{"ASeries", "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"A", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{
+           RowBox[{"ASeries", "'"}], "[", "\[Epsilon]", "]"}]}]}], 
+        "\[IndentingNewLine]", "}"}], "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"AH", "->", "A0"}], ",", 
+         RowBox[{"f1H", "->", "f1"}]}], "}"}]}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"\[Eta]", ",", "f", ",", "A"}], "}"}], "\[IndentingNewLine]", ",",
+       "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", "\[Epsilon]"}], ",", 
+        RowBox[{"-", "\[Epsilon]"}]}], "}"}], "\[IndentingNewLine]", ",", 
+      RowBox[{"WorkingPrecision", "->", "50"}], ",", 
+      RowBox[{"AccuracyGoal", "->", "20"}], ",", 
+      RowBox[{"PrecisionGoal", "->", "20"}]}], "\[IndentingNewLine]", "]"}]}],
+    "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NumericalSoldS", "[", 
+   RowBox[{
+    RowBox[{"f1_", "?", "NumericQ"}], ",", 
+    RowBox[{"A0_", "?", "NumericQ"}]}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"\[Epsilon]", "=", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "8"}]]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"NDSolveValue", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"FinalEq1", "==", "0"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"FinalEq2", "==", "0"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"FinalEq4", "==", "0"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"f", "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{"fSeries", "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"f", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{
+           RowBox[{"fSeries", "'"}], "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"\[Eta]", "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{"\[Eta]Series", "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Eta]", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{
+           RowBox[{"\[Eta]Series", "'"}], "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"A", "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{"ASeries", "[", "\[Epsilon]", "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"A", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+          RowBox[{
+           RowBox[{"ASeries", "'"}], "[", "\[Epsilon]", "]"}]}]}], 
+        "\[IndentingNewLine]", "}"}], "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"AH", "->", "A0"}], ",", 
+         RowBox[{"f1H", "->", "f1"}]}], "}"}]}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"\[Eta]", ",", "f", ",", "A"}], "}"}], "\[IndentingNewLine]", ",",
+       "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", 
+        RowBox[{"1", "-", "\[Epsilon]"}], ",", "\[Epsilon]"}], "}"}], 
+      "\[IndentingNewLine]", ",", 
+      RowBox[{"WorkingPrecision", "->", "50"}], ",", 
+      RowBox[{"AccuracyGoal", "->", "20"}], ",", 
+      RowBox[{"PrecisionGoal", "->", "20"}]}], "]"}]}], "\[IndentingNewLine]",
+    "]"}]}]], "Input"],
+
+Cell["We try to obtain a solution for f\[CloseCurlyQuote][0]=-1 and A[0]=1", \
+"Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExampleAdSPart", "=", 
+   RowBox[{"NumericalSolAdS", "[", 
+    RowBox[{
+     RowBox[{"-", "1"}], ",", "1"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExampledSPart", "=", 
+   RowBox[{"NumericalSoldS", "[", 
+    RowBox[{
+     RowBox[{"-", "1"}], ",", "1"}], "]"}]}], ";"}]], "Input"],
+
+Cell["We can now just plot for \[Eta], f and A.", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ExampleAdSPart", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";", 
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ExampledSPart", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2", ",", 
+   RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ExampleAdSPart", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";", 
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ExampledSPart", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2", ",", 
+   RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"LogPlot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ExampleAdSPart", "[", 
+       RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";", 
+  RowBox[{"p2", "=", 
+   RowBox[{"LogPlot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ExampledSPart", "[", 
+       RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2", ",", 
+   RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], "Input"]}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Normalization", "Section"],
+
+Cell[TextData[{
+ "We would like f[-1]=1 and consequently (see Eq. 2) A[-1] \[LongRightArrow] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"-", 
+    FractionBox["\[Rho]", "L"]}], TraditionalForm]]],
+ " = -Log[1+z], so we make a change of coordinates ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    OverscriptBox["\[Rho]", "_"], "=", 
+    FractionBox["\[Rho]", 
+     SqrtBox[
+      RowBox[{"f", "[", 
+       RowBox[{"-", "1"}], "]"}]]]}], TraditionalForm]]]
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ExamplefAdS", "=", 
+  RowBox[{
+   RowBox[{"ExampleAdSPart", "[", 
+    RowBox[{"[", "2", "]"}], "]"}], "[", 
+   RowBox[{"ExampleAdSPart", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ExampleAdSPart", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";", 
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ExampledSPart", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2", ",", 
+   RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     FractionBox[
+      RowBox[{
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "[", "z", "]"}], "ExamplefAdS"], ",", 
+     
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";", 
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     FractionBox[
+      RowBox[{
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "[", "z", "]"}], "ExamplefAdS"], ",", 
+     
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2", ",", 
+   RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"p1", "=", 
+  RowBox[{"Plot", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Exp", "[", 
+      RowBox[{"2", 
+       RowBox[{"Sqrt", "[", "ExamplefAdS", "]"}], "*", 
+       RowBox[{
+        RowBox[{"ExampleAdSPart", "[", 
+         RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], "]"}], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       FractionBox[
+        RowBox[{"1", "+", "z"}], 
+        RowBox[{"1", "-", "z"}]], ")"}], "2"]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"z", ",", 
+      RowBox[{"ExampleAdSPart", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+      RowBox[{"ExampleAdSPart", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"2", 
+        RowBox[{"Sqrt", "[", "ExamplefAdS", "]"}], 
+        RowBox[{
+         RowBox[{"ExampledSPart", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], "]"}], 
+      SuperscriptBox[
+       RowBox[{"(", 
+        FractionBox[
+         RowBox[{"1", "+", "z"}], 
+         RowBox[{"1", "-", "z"}]], ")"}], "2"]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}]}],
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2"}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Sqrt", "[", "ExamplefAdS", "]"}], "*", 
+      RowBox[{
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Sqrt", "[", "ExamplefAdS", "]"}], 
+      RowBox[{
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"ExampledSPart", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2"}], "]"}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ExampleAinf", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Log", "[", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"Sqrt", "[", "ExamplefAdS", "]"}], "*", 
+        RowBox[{
+         RowBox[{"ExampleAdSPart", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], "]"}], 
+      RowBox[{"(", 
+       FractionBox[
+        RowBox[{"1", "+", "z"}], 
+        RowBox[{"1", "-", "z"}]], ")"}]}], "]"}], "/", 
+    RowBox[{"Sqrt", "[", "ExamplefAdS", "]"}]}], "/.", 
+   RowBox[{"z", "->", 
+    RowBox[{
+     RowBox[{"-", "1"}], "+", 
+     SuperscriptBox["10", 
+      RowBox[{"-", "8"}]]}]}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"ExampleAdSPart", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], "*", 
+    RowBox[{"Exp", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], "-", "ExampleAinf"}],
+      "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"z", ",", 
+     RowBox[{"ExampleAdSPart", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+     RowBox[{"ExampleAdSPart", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}]}], 
+  "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ExampleSource", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"ExampleAdSPart", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], "*", 
+    RowBox[{"Exp", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ExampleAdSPart", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], "-", "ExampleAinf"}],
+      "]"}]}], "/.", 
+   RowBox[{"z", "->", 
+    RowBox[{
+     RowBox[{"-", "1"}], "+", 
+     SuperscriptBox["10", 
+      RowBox[{"-", "8"}]]}]}]}]}]], "Input"]}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Thermodynamics", "Chapter"],
+
+Cell["\<\
+We can now use the previous results as the starting point and obtain a \
+numerical solution.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NumericalSolAdSv2", "[", 
+   RowBox[{
+    RowBox[{"\[Eta]H_", "?", "NumericQ"}], ",", 
+    RowBox[{"f1_", "?", "NumericQ"}], ",", 
+    RowBox[{"A0_", "?", "NumericQ"}], ",", 
+    RowBox[{"ord_", "?", "IntegerQ"}], ",", 
+    RowBox[{"cutoff_", "?", "NumericQ"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"TotalConditions", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "[", "0", "]"}], "->", "0"}], ",", 
+         RowBox[{
+          RowBox[{"\[Eta]", "[", "0", "]"}], "->", "\[Eta]H"}]}], "}"}]}], ",", 
+      RowBox[{"\[Epsilon]", "=", "cutoff"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "0"}], ",", 
+       RowBox[{"i", "<=", "ord"}], ",", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"SeriesHorizonEq1", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{"FinalEq1", ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", "i"}], "}"}]}], "]"}], "/.", 
+           "TotalConditions"}], "//", "Normal"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"SeriesHorizonEq2", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{"FinalEq2", ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", "i"}], "}"}]}], "]"}], "/.", 
+           "TotalConditions"}], "//", "Normal"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"SeriesHorizonConstraint", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{"FinalConstraint", ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", "0"}], "}"}]}], "]"}], "/.", 
+           "TotalConditions"}], "//", "Normal"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"SeriesHorizonEq4", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"f", "[", "z", "]"}], "FinalEq4"}], "//", 
+              "FullSimplify"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", "i"}], "}"}]}], "]"}], "/.", 
+           "TotalConditions"}], "//", "Normal"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"i", "==", "0"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"TotalConditions", "=", 
+           RowBox[{"Join", "[", 
+            RowBox[{"TotalConditions", ",", 
+             RowBox[{
+              RowBox[{"Solve", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"SeriesHorizonEq1", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonEq2", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonEq4", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonConstraint", "==", "0"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"f", "''"}], "[", "0", "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"A", "'"}], "[", "0", "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"A", "''"}], "[", "0", "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"\[Eta]", "'"}], "[", "0", "]"}]}], "}"}]}], "]"}],
+               "//", "Flatten"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"TotalConditions", "=", 
+           RowBox[{"Join", "[", 
+            RowBox[{"TotalConditions", ",", 
+             RowBox[{
+              RowBox[{"Solve", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"SeriesHorizonEq1", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonEq2", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonEq4", "==", "0"}]}], "}"}], ",", 
+                RowBox[{"{", " ", 
+                 RowBox[{
+                  RowBox[{
+                   SuperscriptBox["\[Eta]", 
+                    TagBox[
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", "1"}], ")"}],
+                    Derivative],
+                    MultilineFunction->None], "[", "0", "]"}], ",", 
+                  RowBox[{
+                   SuperscriptBox["A", 
+                    TagBox[
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", "2"}], ")"}],
+                    Derivative],
+                    MultilineFunction->None], "[", "0", "]"}], ",", " ", 
+                  RowBox[{
+                   SuperscriptBox["f", 
+                    TagBox[
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", "2"}], ")"}],
+                    Derivative],
+                    MultilineFunction->None], "[", "0", "]"}]}], "}"}]}], 
+               "]"}], "//", "Flatten"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+         "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     
+     RowBox[{"NDSolveValue", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"FinalEq1", "==", "0"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"FinalEq2", "==", "0"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"FinalEq4", "==", "0"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"f", "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"Normal", "[", 
+              RowBox[{"Series", "[", 
+               RowBox[{
+                RowBox[{"f", "[", "z", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"z", ",", "0", ",", 
+                  RowBox[{"ord", "+", "2"}]}], "}"}]}], "]"}], "]"}]}], "/.", 
+            "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Eta]", "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"Normal", "[", 
+              RowBox[{"Series", "[", 
+               RowBox[{
+                RowBox[{"\[Eta]", "[", "z", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"z", ",", "0", ",", 
+                  RowBox[{"ord", "+", "1"}]}], "}"}]}], "]"}], "]"}]}], "/.", 
+            "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"A", "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"Normal", "[", 
+              RowBox[{"Series", "[", 
+               RowBox[{
+                RowBox[{"A", "[", "z", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"z", ",", "0", ",", 
+                  RowBox[{"ord", "+", "2"}]}], "}"}]}], "]"}], "]"}]}], "/.", 
+            "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"f", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"D", "[", 
+              RowBox[{
+               RowBox[{"Normal", "[", 
+                RowBox[{"Series", "[", 
+                 RowBox[{
+                  RowBox[{"f", "[", "z", "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"z", ",", "0", ",", 
+                    RowBox[{"ord", "+", "2"}]}], "}"}]}], "]"}], "]"}], ",", 
+               "z"}], "]"}]}], "/.", "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"\[Eta]", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"D", "[", 
+              RowBox[{
+               RowBox[{"Normal", "[", 
+                RowBox[{"Series", "[", 
+                 RowBox[{
+                  RowBox[{"\[Eta]", "[", "z", "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"z", ",", "0", ",", 
+                    RowBox[{"ord", "+", "1"}]}], "}"}]}], "]"}], "]"}], ",", 
+               "z"}], "]"}]}], "/.", "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"A", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"D", "[", 
+              RowBox[{
+               RowBox[{"Normal", "[", 
+                RowBox[{"Series", "[", 
+                 RowBox[{
+                  RowBox[{"A", "[", "z", "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"z", ",", "0", ",", 
+                    RowBox[{"ord", "+", "2"}]}], "}"}]}], "]"}], "]"}], ",", 
+               "z"}], "]"}]}], "/.", "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}]}], "\[IndentingNewLine]", 
+         "}"}], "/.", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"A", "[", "0", "]"}], "->", "A0"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"f", "'"}], "[", "0", "]"}], "->", "f1"}]}], "}"}]}], 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"\[Eta]", ",", "f", ",", "A"}], "}"}], "\[IndentingNewLine]", 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", "\[Epsilon]"}], ",", 
+         RowBox[{"-", "\[Epsilon]"}]}], "}"}], "\[IndentingNewLine]", ",", 
+       RowBox[{"WorkingPrecision", "->", "50"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "20"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "20"}], ",", 
+       RowBox[{"MaxSteps", "->", "Infinity"}]}], "\[IndentingNewLine]", 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NumericalSoldSv2", "[", 
+   RowBox[{
+    RowBox[{"\[Eta]H_", "?", "NumericQ"}], ",", 
+    RowBox[{"f1_", "?", "NumericQ"}], ",", 
+    RowBox[{"A0_", "?", "NumericQ"}], ",", 
+    RowBox[{"ord_", "?", "IntegerQ"}], ",", 
+    RowBox[{"cutoff_", "?", "NumericQ"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"TotalConditions", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "[", "0", "]"}], "->", "0"}], ",", 
+         RowBox[{
+          RowBox[{"\[Eta]", "[", "0", "]"}], "->", "\[Eta]H"}]}], "}"}]}], ",", 
+      RowBox[{"\[Epsilon]", "=", "cutoff"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "0"}], ",", 
+       RowBox[{"i", "<=", "ord"}], ",", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"SeriesHorizonEq1", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{"FinalEq1", ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", "i"}], "}"}]}], "]"}], "/.", 
+           "TotalConditions"}], "//", "Normal"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"SeriesHorizonEq2", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{"FinalEq2", ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", "i"}], "}"}]}], "]"}], "/.", 
+           "TotalConditions"}], "//", "Normal"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"SeriesHorizonConstraint", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{"FinalConstraint", ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", "0"}], "}"}]}], "]"}], "/.", 
+           "TotalConditions"}], "//", "Normal"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"SeriesHorizonEq4", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"f", "[", "z", "]"}], "FinalEq4"}], "//", 
+              "FullSimplify"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", "i"}], "}"}]}], "]"}], "/.", 
+           "TotalConditions"}], "//", "Normal"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"i", "==", "0"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"TotalConditions", "=", 
+           RowBox[{"Join", "[", 
+            RowBox[{"TotalConditions", ",", 
+             RowBox[{
+              RowBox[{"Solve", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"SeriesHorizonEq1", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonEq2", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonEq4", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonConstraint", "==", "0"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"f", "''"}], "[", "0", "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"A", "'"}], "[", "0", "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"A", "''"}], "[", "0", "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"\[Eta]", "'"}], "[", "0", "]"}]}], "}"}]}], "]"}],
+               "//", "Flatten"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"TotalConditions", "=", 
+           RowBox[{"Join", "[", 
+            RowBox[{"TotalConditions", ",", 
+             RowBox[{
+              RowBox[{"Solve", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"SeriesHorizonEq1", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonEq2", "==", "0"}], ",", 
+                  RowBox[{"SeriesHorizonEq4", "==", "0"}]}], "}"}], ",", 
+                RowBox[{"{", " ", 
+                 RowBox[{
+                  RowBox[{
+                   SuperscriptBox["\[Eta]", 
+                    TagBox[
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", "1"}], ")"}],
+                    Derivative],
+                    MultilineFunction->None], "[", "0", "]"}], ",", 
+                  RowBox[{
+                   SuperscriptBox["A", 
+                    TagBox[
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", "2"}], ")"}],
+                    Derivative],
+                    MultilineFunction->None], "[", "0", "]"}], ",", " ", 
+                  RowBox[{
+                   SuperscriptBox["f", 
+                    TagBox[
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", "2"}], ")"}],
+                    Derivative],
+                    MultilineFunction->None], "[", "0", "]"}]}], "}"}]}], 
+               "]"}], "//", "Flatten"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+         "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     
+     RowBox[{"NDSolveValue", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"FinalEq1", "==", "0"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"FinalEq2", "==", "0"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"FinalEq4", "==", "0"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"f", "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"Normal", "[", 
+              RowBox[{"Series", "[", 
+               RowBox[{
+                RowBox[{"f", "[", "z", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"z", ",", "0", ",", 
+                  RowBox[{"ord", "+", "2"}]}], "}"}]}], "]"}], "]"}]}], "/.", 
+            "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Eta]", "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"Normal", "[", 
+              RowBox[{"Series", "[", 
+               RowBox[{
+                RowBox[{"\[Eta]", "[", "z", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"z", ",", "0", ",", 
+                  RowBox[{"ord", "+", "1"}]}], "}"}]}], "]"}], "]"}]}], "/.", 
+            "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"A", "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"Normal", "[", 
+              RowBox[{"Series", "[", 
+               RowBox[{
+                RowBox[{"A", "[", "z", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"z", ",", "0", ",", 
+                  RowBox[{"ord", "+", "2"}]}], "}"}]}], "]"}], "]"}]}], "/.", 
+            "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"f", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"D", "[", 
+              RowBox[{
+               RowBox[{"Normal", "[", 
+                RowBox[{"Series", "[", 
+                 RowBox[{
+                  RowBox[{"f", "[", "z", "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"z", ",", "0", ",", 
+                    RowBox[{"ord", "+", "2"}]}], "}"}]}], "]"}], "]"}], ",", 
+               "z"}], "]"}]}], "/.", "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"\[Eta]", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"D", "[", 
+              RowBox[{
+               RowBox[{"Normal", "[", 
+                RowBox[{"Series", "[", 
+                 RowBox[{
+                  RowBox[{"\[Eta]", "[", "z", "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"z", ",", "0", ",", 
+                    RowBox[{"ord", "+", "1"}]}], "}"}]}], "]"}], "]"}], ",", 
+               "z"}], "]"}]}], "/.", "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"A", "'"}], "[", "\[Epsilon]", "]"}], "==", 
+             RowBox[{"D", "[", 
+              RowBox[{
+               RowBox[{"Normal", "[", 
+                RowBox[{"Series", "[", 
+                 RowBox[{
+                  RowBox[{"A", "[", "z", "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"z", ",", "0", ",", 
+                    RowBox[{"ord", "+", "2"}]}], "}"}]}], "]"}], "]"}], ",", 
+               "z"}], "]"}]}], "/.", "TotalConditions"}], "/.", 
+           RowBox[{"z", "->", "\[Epsilon]"}]}]}], "\[IndentingNewLine]", 
+         "}"}], "/.", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"A", "[", "0", "]"}], "->", "A0"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"f", "'"}], "[", "0", "]"}], "->", "f1"}]}], "}"}]}], 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"\[Eta]", ",", "f", ",", "A"}], "}"}], "\[IndentingNewLine]", 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", 
+         RowBox[{"1", "-", "\[Epsilon]"}], ",", "\[Epsilon]"}], "}"}], 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"WorkingPrecision", "->", "50"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "20"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "20"}], ",", 
+       RowBox[{"MaxSteps", "->", "Infinity"}]}], "\[IndentingNewLine]", 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TestSolutionAdS", "=", 
+   RowBox[{"NumericalSolAdSv2", "[", 
+    RowBox[{
+     RowBox[{
+      SqrtBox["3"], 
+      FractionBox["\[Pi]", "2"]}], ",", 
+     RowBox[{"-", "1"}], ",", "20", ",", "3", ",", 
+     FractionBox["1", "10000000000"]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TestSolutiondS", "=", 
+   RowBox[{"NumericalSoldSv2", "[", 
+    RowBox[{
+     RowBox[{
+      SqrtBox["3"], 
+      FractionBox["\[Pi]", "2"]}], ",", 
+     RowBox[{"-", "1"}], ",", "20", ",", "3", ",", 
+     FractionBox["1", "10000000000"]}], "]"}]}], ";"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"TestfAdS", "=", 
+  RowBox[{
+   RowBox[{"TestSolutionAdS", "[", 
+    RowBox[{"[", "2", "]"}], "]"}], "[", 
+   RowBox[{"TestSolutionAdS", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"TestAinf", "=", 
+  RowBox[{"Chop", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Log", "[", 
+       RowBox[{
+        RowBox[{"Exp", "[", 
+         RowBox[{
+          RowBox[{"Sqrt", "[", "TestfAdS", "]"}], "*", 
+          RowBox[{
+           RowBox[{"TestSolutionAdS", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], "]"}], 
+        RowBox[{"(", 
+         FractionBox[
+          RowBox[{"1", "+", "z"}], 
+          RowBox[{"1", "-", "z"}]], ")"}]}], "]"}], "/", 
+      RowBox[{"Sqrt", "[", "TestfAdS", "]"}]}], "/.", 
+     RowBox[{"z", "->", 
+      RowBox[{"TestSolutionAdS", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}]}]}], ",", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "40"}]]}], "]"}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"TestSolutionAdS", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"TestSolutiondS", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"TestSolutiondS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"TestSolutiondS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2"}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     FractionBox[
+      RowBox[{
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "[", "z", "]"}], "TestfAdS"], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     FractionBox[
+      RowBox[{
+       RowBox[{"TestSolutiondS", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "[", "z", "]"}], "TestfAdS"], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"TestSolutiondS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"TestSolutiondS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2"}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p1", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      SqrtBox["TestfAdS"], 
+      RowBox[{
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p2", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      SqrtBox["TestfAdS"], 
+      RowBox[{
+       RowBox[{"TestSolutiondS", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", 
+       RowBox[{"TestSolutiondS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"TestSolutiondS", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"p1", ",", "p2", ",", 
+   RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"TestSource", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"TestSolutionAdS", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], "*", 
+    RowBox[{"Exp", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"TestSolutionAdS", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], "-", "TestAinf"}], 
+     "]"}]}], "/.", 
+   RowBox[{"z", "->", 
+    RowBox[{"TestSolutionAdS", "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"T", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     FractionBox[
+      RowBox[{"Abs", "[", 
+       RowBox[{
+        FractionBox[
+         RowBox[{
+          SuperscriptBox["z", "2"], "-", "1"}], 
+         RowBox[{"2", "L"}]], 
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"TestSolutionAdS", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "'"}], "[", "z", "]"}], 
+         SuperscriptBox["TestfAdS", 
+          FractionBox["1", "2"]]]}], "]"}], 
+      RowBox[{"4", "\[Pi]"}]], 
+     FractionBox["1", "TestSource"], 
+     RowBox[{"Exp", "[", 
+      RowBox[{
+       SqrtBox["TestfAdS"], 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"TestSolutionAdS", "[", 
+           RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], "-", "TestAinf"}],
+         ")"}]}], "]"}]}], "/.", 
+    RowBox[{"z", "->", 
+     RowBox[{"TestSolutionAdS", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}]}]}], "/.", 
+   RowBox[{"L", "->", "1"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"s", "=", 
+  RowBox[{
+   RowBox[{"2", "\[Pi]", " ", 
+    RowBox[{
+     FractionBox["1", 
+      SuperscriptBox["TestSource", "2"]], 
+     RowBox[{"Exp", "[", 
+      RowBox[{"2", 
+       SqrtBox["TestfAdS"], 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"TestSolutionAdS", "[", 
+           RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], "-", "TestAinf"}],
+         ")"}]}], "]"}]}]}], "/.", 
+   RowBox[{"z", "->", 
+    RowBox[{"TestSolutionAdS", "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "1", ",", "1", ",", "2"}], "]"}], 
+     "]"}]}]}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PhaseDiagram", "[", "N_", "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"SolutionAdS", ",", 
+      RowBox[{"STList", "=", 
+       RowBox[{"{", "}"}]}], ",", "Source", ",", "fAdS", ",", "Ainf", ",", 
+      "Temp", ",", "S", ",", "\[Eta]h"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"j", "=", "1"}], ",", 
+       RowBox[{"j", "<=", "N"}], ",", 
+       RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"SolutionAdS", "=", 
+         RowBox[{"NumericalSolAdSv2", "[", 
+          RowBox[{
+           RowBox[{
+            SqrtBox["3"], "\[Pi]", 
+            FractionBox["j", "N"]}], ",", 
+           RowBox[{"-", "1"}], ",", "1", ",", "4", ",", 
+           FractionBox["1", "100000000"]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"fAdS", "=", 
+         RowBox[{
+          RowBox[{"SolutionAdS", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "[", "z", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Ainf", "=", 
+         RowBox[{
+          FractionBox["1", 
+           RowBox[{"Sqrt", "[", "fAdS", "]"}]], 
+          RowBox[{"Log", "[", 
+           RowBox[{
+            RowBox[{"Exp", "[", 
+             RowBox[{
+              RowBox[{"Sqrt", "[", "fAdS", "]"}], "*", 
+              RowBox[{
+               RowBox[{"SolutionAdS", "[", 
+                RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}]}], "]"}], 
+            RowBox[{"(", 
+             FractionBox[
+              RowBox[{"1", "+", "z"}], 
+              RowBox[{"1", "-", "z"}]], ")"}]}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Source", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"SolutionAdS", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "[", "z", "]"}], "*", 
+          RowBox[{"Exp", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"SolutionAdS", "[", 
+              RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], "-", "Ainf"}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Temp", "=", 
+         RowBox[{
+          FractionBox[
+           RowBox[{"Abs", "[", 
+            RowBox[{
+             FractionBox[
+              RowBox[{
+               SuperscriptBox["z", "2"], "-", "1"}], 
+              RowBox[{"2", "L"}]], 
+             FractionBox[
+              RowBox[{
+               RowBox[{
+                RowBox[{"SolutionAdS", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "'"}], "[", "z", "]"}], 
+              SuperscriptBox["fAdS", 
+               FractionBox["1", "2"]]]}], "]"}], 
+           RowBox[{"4", "\[Pi]"}]], 
+          RowBox[{"Exp", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"SolutionAdS", "[", 
+              RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], "-", "Ainf"}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"S", "=", 
+         RowBox[{"2", "\[Pi]", " ", 
+          RowBox[{"Exp", "[", 
+           RowBox[{"2", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"SolutionAdS", "[", 
+                RowBox[{"[", "3", "]"}], "]"}], "[", "z", "]"}], "-", 
+              "Ainf"}], ")"}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"\[Eta]h", "=", 
+         RowBox[{
+          SqrtBox["3"], "\[Pi]", 
+          FractionBox["j", "N"]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"STList", ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Temp", ",", "S", ",", "Source", ",", "\[Eta]h"}], "}"}],
+             "/.", 
+            RowBox[{"L", "->", "1"}]}], "/.", 
+           RowBox[{"z", "->", 
+            RowBox[{"SolutionAdS", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}]}]}]}],
+          "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", "STList"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TS", "=", 
+   RowBox[{"Timer", "[", 
+    RowBox[{"PhaseDiagram", "[", "1000", "]"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLogPlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"TS", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "4"}], "]"}], "]"}], ",", 
+      RowBox[{"TS", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"Joined", "->", "True"}], ",", 
+   RowBox[{"PlotLegends", "->", "Automatic"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLogPlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"TS", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "4"}], "]"}], "]"}], ",", 
+      RowBox[{"TS", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"Joined", "->", "True"}], ",", 
+   RowBox[{"PlotLegends", "->", "Automatic"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLogLogPlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox[
+       RowBox[{"TS", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "1"}], "]"}], "]"}], 
+       RowBox[{"Abs", "[", 
+        RowBox[{"TS", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "3"}], "]"}], "]"}], "]"}]], ",", 
+      FractionBox[
+       RowBox[{"TS", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "2"}], "]"}], "]"}], 
+       SuperscriptBox[
+        RowBox[{"TS", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "3"}], "]"}], "]"}], "2"]]}], "}"}], "]"}], ",", 
+   RowBox[{"Joined", "->", "False"}], ",", 
+   RowBox[{"PlotLegends", "->", "Automatic"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"TS", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "4"}], "]"}], "]"}], ",", 
+      RowBox[{"TS", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "3"}], "]"}], "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"Joined", "->", "True"}], ",", 
+   RowBox[{"PlotLegends", "->", "Automatic"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Speak", "[", "\"\<Finished\>\"", "]"}]], "Input"]
+}, Open  ]]
+},
+SpellingDictionaries->{"CorrectWords"->{"f\[CloseCurlyQuote]"}},
+Magnification:>1.5 Inherited,
+StyleDefinitions->"MyStyle.nb"]
