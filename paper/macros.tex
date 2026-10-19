@@ -1,0 +1,39 @@
+% Project-wide notation. Define every symbol used more than once here, so
+% notation changes are one-line edits. Keep in sync with notes/conventions.md.
+
+% --- abbreviations (xspace adds the following space only when needed: "\eg the", "\etal showed") ---
+\newcommand{\eg}{\emph{e.g.}\@\xspace}
+\newcommand{\ie}{\emph{i.e.}\@\xspace}
+\newcommand{\cf}{\emph{cf.}\@\xspace}
+\newcommand{\etc}{\emph{etc.}\@\xspace}
+\newcommand{\etal}{\emph{et al.}\@\xspace}
+\newcommand{\wrt}{w.r.t.\@\xspace}
+\newcommand{\PT}{$PT$\xspace}           % example paper: "\PT-symmetric", "the \PT transformation"
+
+% --- general ---
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\order}[1]{\mathcal{O}\!\left(#1\right)}
+\newcommand{\then}{\Rightarrow}
+\newcommand{\im}{i\,}
+
+% --- quantum mechanics / field theory ---
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\vev}[1]{\left\langle{#1}\right\rangle}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\IDB}{\text{IDB}}         % example paper: imaginary distance bound (math only, no xspace)
+
+% --- editing (remove before submission; /build-paper lists them) ---
+% \notesfalse (in main.tex, after \input{macros}) hides every note below for a clean draft.
+\newif\ifnotes \notestrue
+% \editnote{colour}{text}: shared by \todo and the author commands; prints [text] in colour, or nothing
+% (eating the following space, so no double space) under \notesfalse. Not meant to be used directly.
+\newcommand{\editnote}[2]{\ifnotes\textcolor{#1}{[#2]}\else\expandafter\ignorespaces\fi}
+\newcommand{\todo}[1]{\editnote{red}{TODO: #1}}
+% One coloured note command per collaborator: \newauthornote{JM}{teal} defines \JM{comment} -> [JM: comment]
+\newcommand{\newauthornote}[2]{\expandafter\newcommand\csname #1\endcsname[1]{\editnote{#2}{#1: ##1}}}
+\newauthornote{JM}{teal}     % example paper: J. M. Begines
+\newauthornote{AF}{orange}   % example paper: A. F. Faedo
+\newauthornote{CH}{magenta}  % example paper: C. Hoyos
+\newauthornote{DM}{violet}   % example paper: D. Musso

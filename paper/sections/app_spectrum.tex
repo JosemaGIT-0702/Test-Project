@@ -1,0 +1,173 @@
+\section{Spectrum of ghost scalar fluctuations}\label{app:numerics}
+
+This appendix provides some details on the explicit computation of the low-lying values for the squared mass $M^2$ in the spectrum of normal modes for examples 1, 2 and 5 listed in Subsection \ref{subsec:examples}.%
+\footnote{
+At \cite{code} we share a Wolfram Mathematica notebook collecting the actual computations described in this appendix.
+}\\
+
+\noindent 
+\textbf{Example 2:}
+When the linearized equation of motion for a perturbation field admits an analytic solution, one can find the spectrum of the normal modes by imposing that the near-boundary coefficient corresponding to the source vanishes. The combination $Z_\eta$ in example 2 is amenable to such an analytical approach upon a suitable change of radial coordinate. More specifically, in the radial coordinate $r\in\left(-\infty,+\infty\right)$, we find the equation 
+\begin{align}
+	Z_\eta''
+	+
+	\frac{3a'}{2a} Z_\eta'
+	+
+	\left[
+	\frac{\omega^2-k^2}{a}
+	-\frac{2a\eta_0' V'(\eta_0)}{a'}
+	-\frac{a^2\eta_0'^4}{2 a'^2}
+	+V''(\eta_0)
+	-\frac{3}{2} \eta_0'^2\right]
+	Z_\eta
+	=     
+	0,
+\end{align}
+where the background solution $\eta_0$ for the field $\eta$ is given in \eqref{eq:sol2} (there, we dropped the subindex 0). For convenience, we have also indicated the warp factor as $a\equiv e^{2A}$. The potential $V$ is derived from the superpotential $W$ given in \eqref{eq:Wex2} according to the general formula \eqref{eq:VfromW},
+\begin{eqnarray}
+	V(\eta)
+	=
+	\input{generated/eq_potential_ex2}\ .
+\end{eqnarray}
+
+Upon compactifying the radial coordinate according to
+\begin{eqnarray}
+	\label{eq:compa}
+	r(v) = v_0 + L \log \left(\frac{1+v}{1-v}\right)
+	\ , \qquad 
+	z_\eta[v(r)] \equiv Z_\eta\left(r\right)\ ,
+\end{eqnarray}
+with $v\in\left[-1,1\right]$ and $u_0$, $L$ real positive constants, we obtain the equation 
+\begin{eqnarray}
+	\label{eq:zeta}
+	z_\eta''
+	+
+	\frac{2 v \left(v^2-5\right) }{v^4-1}
+	z_\eta'
+	+
+	\left[\frac{M^2}{\left(v^2+1\right)^2}-\frac{2 \left(v^4-6 v^2+1\right)}{v^2 \left(v^2-1\right)^2}\right] 
+	z_\eta
+	=
+	0\ ,
+\end{eqnarray}
+where $M^2/L^2 = \omega^2-k^2$ and the prime denotes the derivative with respect to $v$. This equation admits an analytical solution, we avoid writing it here because it is quite involved%
+\footnote{The full solution can be found in \cite{code}.}. It is important to note that the equation \eqref{eq:zeta} is singular at $v=0$, within the domain $v\in\left[-1,1\right]$. Thus, we need to impose regularity conditions there to the fluctuating modes. Interestingly, this splits the study of the fluctuations $z_\eta$ in two subproblems defined on the positive and negative domain for $v$, respectively.
+This happens only for the fluctuation of the ghost scalar, for the fluctuations involving only the metric, the only singular points in the equations are ar $v=\pm 1$ and the spectrum splits according to parity in the holographic direction to $v\to -v$.
+
+Consider the problem on the negative domain. In addition to the regularity requirement at $v=0$, we impose that the fall-off associated with the source vanishes at $v=-1$. Since we need to consider alternative quantization, we actually enforce that the ratio of the subleading coefficient over the leading one vanishes. This allows us to read the values of $M^2$ for which this occurs, namely the squared masses of the normal modes. The results concerning the three lowest-lying modes are reported in Table \ref{tab:spectra}. Given the parity symmetry of the equation \eqref{eq:zeta}, the subproblem concerning the positive $v$ domain is identical to the problem on the negative $v$ domain.
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{c|cccc|c}
+      % example 1: calc/python/scripts/03_ghost_spectrum.py
+      % example 2: calc/python/scripts/05_ghost_spectrum_ex2.py
+      % example 5: from the original notebook \cite{code}, not yet reproduced in calc/
+      Example 1 & \valMSqExOneFirst & \valMSqExOneSecond & \valMSqExOneThird & ... & \text{(spectral)}
+      \\ 
+      Example 2 & \valMSqExTwoFirst & \valMSqExTwoSecond & \valMSqExTwoThird & ... & \text{(analytical)}
+      \\ 
+      Example 5 & 18.62 & 37.22 & 65.04  & ... & \text{(Wronksian)}
+	\end{tabular}
+	\caption{Lowest-lying $M^2$ eigenvalues in the spectrum of normal modes.}
+	\label{tab:spectra}
+\end{table}
+\vspace{10pt}
+
+\noindent 
+\textbf{Example 1:}
+The equation for $Z_\eta$ in example 1 is
+\begin{align}
+	Z_\eta''
+	+
+	\frac{2a'}{a} Z_\eta'
+	+
+	\left[
+	\frac{\omega^2-k^2}{a}
+	-\frac{4 a \eta_0' V'(\eta_0)}{3a'}
+	-\frac{2a^2\eta_0'^4}{9a'^2}
+	+V''(\eta_0)
+	-\frac{4}{3} \eta_0'^2\right]
+	Z_\eta
+	=     
+	0\ ,
+\end{align}
+where the background profile of the scalar $\eta$ is given in \eqref{eq:sol1} and $a= e^{2A}$. The potential is derived from the superpotential \eqref{eq:Wex1},
+\begin{eqnarray}
+	V(\eta)
+	=
+	\input{generated/eq_potential_ex1}\ .
+\end{eqnarray}
+One can again perform the same change of radial coordinate as in \eqref{eq:compa}, leading to
+\begin{align}
+	\label{eq:zeta1}
+	z_\eta''
+	&+
+	\frac{2 v \left(v^4-10v^2-15\right) }{v^6+5v^4-5v^2-1}
+	z_\eta'
+	\\ &\qquad +
+	2\left[\frac{M^2}{1+6v^2+v^4}
+	-
+	\frac{v^8-12v^6-10v^4-12v^2+1}{v^2 \left(v^4-1\right)^2}\right] 
+	z_\eta
+	=
+	0,
+\end{align}
+with $M^2/L^2 = \omega^2 - k^2$.
+As in example 2, we find an equation which is singular at $v=0$. The problem splits in two, one for positive $v$ and another identical problem for negative $v$, because we need to require regularity of the solutions at $v=0$. As in the previous example, this only happens for the scalar fluctuation.
+
+Apparently, it is not easy to handle  equation \eqref{eq:zeta1} analytically. We resort to a spectral method discretized on a Gauss-Lobatto collocation grid and adopt Chebyshev polynomials as the basis functions. Let us focus on the subproblem in the negative $v\in\left[-1,0\right]$ domain. We redefine the fluctuating field $z_\eta$ in such a way that the boundary conditions reduce to the simple requirement of finiteness at the two extrema of the domain. More specifically, the leading and subleading behaviors of the field $z_\eta$ near the singular points $v=-1$ and $v=0$ are, respectively,
+\begin{align}
+	z_\eta &=
+	2(1+v)^2 \log(1+v)\, a_1
+	+
+	(1+v)^2\, a_2 
+	+ ...
+	\ , \\
+	z_\eta &=
+	\frac{b_1}{v}
+	+ v^2\, b_2 + ...\ .
+\end{align}
+We then define 
+\begin{equation}
+	z_\eta(v) 
+	\equiv 
+	v^2 (1+v)^2 \psi(v) \ ,
+\end{equation}
+were we factor out explicitly the subleading (regular) behaviors at the two extrema of the integration domain. In this way, a finite value for $\psi$ at $v=-1$ and $v=0$ corresponds to a regular (and vanishing) $z_\eta$, namely $z_\eta(-1)=z_\eta(0)=0$. 
+
+There is still a technical but important step before actually solving by means of the Chebyshev spectral method. In order to adapt the interval $v\in\left[-1,0\right]$ to the domain $s\in\left[-1,1\right]$ on which the Chebyshev polynomials are defined, we perform a further change of variable $v=\frac{s-1}{2}$. After multiplying for the singular factor $(1-s^2)$, the final equation is given by
+\begin{eqnarray}
+	(1-s^2)\, \psi''(s)
+	+ 
+	\left[A_0(s) + A_1(s) M^2\right]\psi'(s)
+	+
+	\left[B_0(s) + B_1(s) M^2\right] \psi(s)
+	=
+	0
+\end{eqnarray}
+where the prime denotes a derivative with respect to $s$. % A_0, A_1, B_0, B_1 below are re-derived and checked in calc/mathematica/scripts/02_ghost_fluctuations.wl
+We have split the coefficient functions $A$ and $B$ according to the order in $M^2$; their explicit expressions are
+\begin{align}
+	A_0(s) &\equiv 
+	\frac{32 \left[3 (s-1) s^2+s+7\right]}{(s-2) s \left[(s-2) s+26\right]+41}-10 s+\frac{24}{s-3}-2
+	\ , \\
+	A_1(s) &\equiv 0
+	\ , \\ 
+	B_0(s) &\equiv 
+	-\frac{64 (s-3)}{\left[(s-2) s+5\right]^2}-\frac{32}{(s-2) s+5}-\frac{32 \left\{s \left[(s-15) s+39\right]-41\right\}}{(s-2) s \left[(s-2) s+26\right]+41}
+	\\ \nonumber & \qquad \qquad 
+	+\frac{28}{s-3}-\frac{32}{(s-3)^2}-18
+	\ , \\
+	B_1(s) &\equiv 
+	\frac{8(1-s^2)}{(s-2) s \left[(s-2) s+26\right]+41}\ .
+\end{align}
+The results are presented in Table \ref{tab:spectra}. The values shown in the table for the lowest-lying eigevalues $M^2$ are stable upon doubling the number of collocation points from 100 to 200.\\ 
+
+\noindent 
+\textbf{Example 5:} Here, we have two ghost fields, $\eta_{1,2}$, and we can construct the associated gauge-invariant combinations according to \eqref{eq:zetaeta}; let us denote these latter with $Z_{1,2}$. %At vanishing spatial momentum, 
+Although $Z_{1,2}$ do not source the gauge-invariant modes $H$ of the metric, still $Z_1$ and $Z_2$ are coupled to each other. 
+
+Since this case presents cumbersome expressions, we leave the explicit details about the equations and their handling to the notebook shared at \cite{code}. We tackled the study of the spectrum with a numerical shooting method. Again, as in examples 1 and 2, the fluctuation problem splits into two subproblems corresponding to the two sides of the wormhole background (only for the scalar fluctuations) . Each problem refers to fluctuations in the region extending from the throat of the wormhole (the center of the bulk) to the corresponding boundary. The shooting method entails finding an asymptotic series expansion at each of the two extrema of the integration domain. One needs to enforce the desired boundary conditions on these expansions and then feed them as initial conditions to a numerical solver. One thus finds a numerical solution propagating from the boundary to towards the bulk interior and another numerical solution propagating from the throat towards the boundary.
+
+The two numerical solutions are then matched at an intermediate point. Specifically, one asks that the $4\times 4$ Wronksian built from the numerical solutions and their derivatives evaluated at the matching point vanishes. This means that the two solutions are linearly dependent (since the problem is linear, they are actually the same solution). The values of $M^2$ at which the Wronksian vanishes are the sought-for eigenvalues. The three lowest-lying squared mass eigenvalues are reported in \eqref{tab:spectra}.
+

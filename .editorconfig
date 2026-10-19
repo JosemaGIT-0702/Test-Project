@@ -1,0 +1,22 @@
+root = true
+
+# Indent with tabs everywhere (shown 4 wide); spaces only for alignment inside a line
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab
+indent_size = 4
+tab_width = 4
+
+# YAML forbids tabs; Markdown nested lists and code blocks rely on spaces
+[*.{yml,yaml,md}]
+indent_style = space
+indent_size = 2
+
+# External / generated files: keep their own formatting
+[{uv.lock,paper/references.bib,paper/jheppub.sty,paper/JHEP.bst,*.nb}]
+indent_style = unset
+indent_size = unset
+trim_trailing_whitespace = unset

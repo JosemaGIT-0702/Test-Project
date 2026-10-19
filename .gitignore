@@ -1,0 +1,44 @@
+# LaTeX build
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz
+paper/*.synctex(busy)
+paper/main.pdf
+build/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Mathematica
+*.nb~
+*.mx
+
+# Data: keep small raw inputs in git, large ones elsewhere (document where in data/README.md)
+data/processed/*
+!data/processed/.gitkeep
+
+# Literature PDFs (copyright)
+literature/pdf/
+
+# Claude Code personal settings
+.claude/settings.local.json
+
+# OS / editors
+.DS_Store
+.vscode/*
+# .vscode/settings.json is shared: LaTeX Workshop builds with paper/latexmkrc (pdflatex)
+!.vscode/settings.json
+# .vscode/extensions.json recommends the extensions settings.json relies on (Ruff formatter)
+!.vscode/extensions.json
+*.swp

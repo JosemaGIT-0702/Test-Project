@@ -1,0 +1,6 @@
+{
+	"name":"potential_ex2",
+	"mathematica":"(-2*(2 + Cos[eta]))\/L^2",
+	"tex":"-\\frac{2 (\\cos (\\eta )+2)}{L^2}",
+	"generated":"2026-10-16T14:57:11"
+}

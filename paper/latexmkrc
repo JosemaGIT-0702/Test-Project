@@ -1,0 +1,5 @@
+$pdf_mode = 1;
+$bibtex_use = 2;
+$interaction = 'nonstopmode';
+@default_files = ('main.tex');
+$pdflatex = 'pdflatex -synctex=1 -file-line-error -halt-on-error %O %S';

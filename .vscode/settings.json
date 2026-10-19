@@ -1,0 +1,38 @@
+{
+	// The paper is pdflatex-only (arXiv, \pdfoutput=1): build it exactly like `make paper`,
+	// i.e. plain latexmk in paper/, which reads paper/latexmkrc. Overrides user recipes here only.
+	"latex-workshop.latex.tools": [
+		{
+			"name": "latexmk-latexmkrc",
+			"command": "latexmk",
+			"args": [],
+			"env": {}
+		}
+	],
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "latexmk (paper/latexmkrc, pdflatex)",
+			"tools": ["latexmk-latexmkrc"]
+		}
+	],
+	"latex-workshop.latex.recipe.default": "first",
+	"latex-workshop.latex.rootFile.doNotPrompt": true,
+	"latex-workshop.latex.search.rootFiles.include": ["paper/main.tex"],
+	// SyncTeX (paper/latexmkrc passes -synctex=1): view the PDF in a VS Code tab;
+	// double-click in the PDF jumps to the source, Cmd+Option+J jumps from source to PDF
+	"latex-workshop.view.pdf.viewer": "tab",
+	"latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+	// Indent with tabs (see .editorconfig); YAML and Markdown keep spaces
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.tabSize": 4,
+	"[yaml]": { "editor.insertSpaces": true, "editor.tabSize": 2 },
+	"[markdown]": { "editor.insertSpaces": true, "editor.tabSize": 2, "editor.wordWrap": "on" },
+	// Soft-wrap long lines at the window edge (display only; the file is unchanged)
+	"[latex]": { "editor.wordWrap": "on" },
+	// Python is formatted on save by ruff (extension charliermarsh.ruff), same as `make format`
+	"[python]": {
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.formatOnSave": true
+	}
+}

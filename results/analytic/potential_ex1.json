@@ -1,0 +1,6 @@
+{
+	"name":"potential_ex1",
+	"mathematica":"(-3*(3 + Cos[(2*eta)\/Sqrt[3]]))\/L^2",
+	"tex":"-\\frac{3 \\left(\\cos \\left(\\frac{2 \\eta }{\\sqrt{3}}\\right)+3\\right)}{L^2}",
+	"generated":"2026-10-16T14:57:11"
+}

@@ -1,0 +1,10 @@
+# Generated files: collapse in diffs/PRs
+paper/generated/** linguist-generated=true
+results/** linguist-generated=true
+paper/jheppub.sty linguist-vendored=true
+paper/JHEP.bst linguist-vendored=true
+
+# Mathematica notebooks: staged through tools/nbstrip.py (outputs, cache and metadata removed;
+# the filter is registered by `make setup`), so diffs show only the inputs
+*.nb filter=nbstrip linguist-language=Mathematica
+*.wl linguist-language=Mathematica

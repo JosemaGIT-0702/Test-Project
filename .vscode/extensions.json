@@ -1,0 +1,8 @@
+{
+	"recommendations": [
+		"anthropic.claude-code",
+		"charliermarsh.ruff",
+		"james-yu.latex-workshop",
+		"editorconfig.editorconfig"
+	]
+}

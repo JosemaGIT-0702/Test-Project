@@ -1,0 +1,56 @@
+\section{A general type IIB truncation}\label{app:trunc}
+
+In this section we will consider the truncation to six scalars appeared in \cite{Khavaev:2000gb,Bobev:2010de}. Truncating different combinations of the scalars one recovers most of the examples discussed in the main sections: the $\mathcal{N}=2^*$, Leigh--Strassler, GPPZ and holographic superconductor cases (numbered 3 to 6 above). Furthermore, it contains the vectors and phases that allow us to interpret four of them as the modulus of a complex, charged scalar, so that our general observations apply. The action can be written as 
+\begin{align}
+S=\frac{1}{2\kappa^2}\int\dd^5x & \sqrt{-g}\left[R-2\sum_{i=1}^4\partial_\mu\varphi_i\partial^\mu\varphi_i-12\partial_\mu\alpha\partial^\mu\alpha-4\partial_\mu\beta\partial^\mu\beta-\frac12\sum_{i=1}^4\sinh^2(2\varphi_i)D_\mu\theta_i D^\mu\theta_i\right.\nonumber\\[2mm]
+&\left.-e^{4(\alpha-\beta)}F_{\mu\nu}^1F^{1\,\mu\nu}-e^{4(\alpha+\beta)}F_{\mu\nu}^2F^{2\,\mu\nu}-e^{-8\alpha}F_{\mu\nu}^3F^{3\,\mu\nu}-V\right]+S_{\rm top}\ ,
+\end{align}
+where $S_{\rm top}$ are topological terms for the vectors, not specified in \cite{Bobev:2010de}, that play no role in the following. We have defined the covariant derivatives
+\begin{align}
+D_\mu\theta_1=\partial_\mu\theta_1+A_\mu^1+A_\mu^2-A_\mu^3\ ,\qquad D_\mu\theta_2=\partial_\mu\theta_2+A_\mu^1-A_\mu^2+A_\mu^3\ ,\nonumber\\[2mm]
+D_\mu\theta_3=\partial_\mu\theta_3-A_\mu^1+A_\mu^2+A_\mu^3\ ,\qquad D_\mu\theta_4=\partial_\mu\theta_4-A_\mu^1-A_\mu^2-A_\mu^3\ .
+\end{align} 
+The potential is given in terms of the superpotential\footnote{The constant $g$ appearing in \cite{Khavaev:2000gb,Bobev:2010de} is related to the AdS radius as $g=2/L$.} 
+\begin{align}
+W=-\frac{e^{-2\alpha-2\beta}}{L}&\left[\left(1+e^{4\beta}-e^{6\alpha+2\beta}\right)\cosh(2\varphi_1)+\left(-1+e^{4\beta}+e^{6\alpha+2\beta}\right)\cosh(2\varphi_2)\right.\nonumber\\[2mm]
+&\left.+\left(1-e^{4\beta}+e^{6\alpha+2\beta}\right)\cosh(2\varphi_3)+\left(1+e^{4\beta}+e^{6\alpha+2\beta}\right)\cosh(2\varphi_4)\right]\ ,
+\end{align}
+as
+\begin{align}
+V&=\frac18\left[\sum_{i=1}^4\left(\frac{\partial W}{\partial\varphi_i}\right)^2+\frac16\left(\frac{\partial W}{\partial\alpha}\right)^2+\frac12\left(\frac{\partial W}{\partial\beta}\right)^2\right]-\frac13W^2\ .\nonumber
+\end{align}
+From the form of the action it is evident that the $\varphi_i$ scalars can be combined with the phases $\theta_i$ to form four charged, complex scalars $\zeta_j=\tanh{(\varphi_j)}\,e^{\im\theta_j}$, $j=1,\dots,4$, with kinetic terms 
+\begin{align}
+2\sum_{i=1}^4\cosh^4(\varphi_i)D_\mu\zeta_i\overline{D^\mu\zeta_i}\ .
+\end{align}
+The neutral scalars are dual to boson bilinear operators and thus have dimension $\Delta=2$. In terms of the usual six scalars $X_a$, $a=1,\dots,6$, of $\mathcal{N}=4$ super Yang--Mills, the relation is
+\begin{align}
+\alpha\quad&\leftrightarrow\quad \Tr\left(2X_6^2+2X_5^2-X_4^2-X_3^2-X_2^2-X_1^2\right),\nonumber\\[2mm]
+\beta\quad&\leftrightarrow\quad\Tr\left(X_1^2+X_2^2-X_3^2-X_4^2\right).
+\end{align}
+On the other hand, the charged scalars are dual to fermion bilinears with dimension $\Delta=3$. Their moduli are identified as 
+\begin{align}
+\varphi_j\quad\leftrightarrow\quad\Tr\left(\lambda_j\lambda_j\right)+{\rm h.c.}\ ,
+\end{align}
+with $\lambda_j$ the four fermions of the gauge theory. 
+
+This model has several interesting subtruncations that yield some of the models and solutions discussed in sections \ref{subsec:superpotential} and \ref{subsec:examples}. First, it is consistent to truncate away $\beta=\varphi_1=\varphi_4=0$ while identifying $\varphi_3=\varphi_2=\chi$.\footnote{This has to be accompanied with $\theta_1=\theta_4=0$, together with $A^1_\mu=A^2_\mu=0$.} The resulting model gives the $\mathcal{N}=2^*$ flow of \cite{Pilch:2000ue}. Indeed, the superpotential reduces to 
+\begin{align}
+W=-\frac{2}{L}\left[2e^{-2\alpha}+e^{4\alpha}\cosh(2\chi)\right],
+\end{align}
+which coincides with that of example 3 above.
+
+The Leigh--Strassler flow in \cite{Pilch:2000fu} can be recovered by truncating out $\varphi_2=\varphi_3=\varphi_4=\beta=0$ and keeping just $\alpha$ and $\varphi_1=\chi$. The superpotential reduces to 
+\begin{align}
+  W=-\frac{e^{-2\alpha}}{L}\left[\left(2-e^{6\alpha}\right)\cosh(2\chi)+2+3e^{6\alpha}\right],  
+\end{align}
+which is indeed that of example 4. The resulting equations cannot be integrated in closed form and must be solved numerically. 
+
+The GPPZ model \cite{Girardello:1999bd} can be obtained by fixing $\alpha=\beta=0$ and identifying the three scalars $\varphi_1=\varphi_2=\varphi_3=\frac{m}{\sqrt{3}}$, together with $\varphi_4=\sigma$. In addition, it is necessary to identify the phases, $\theta_1=\theta_2=\theta_3$, and the vectors, $A_\mu^1=A_\mu^2=A_\mu^3$. The superpotential reduces to
+\begin{align}
+W=-\frac{3}{L}\left[\cosh\left(\frac{2m}{\sqrt{3}}\right)+\cosh(2\sigma)\right],
+\end{align}
+giving case 5 above. It is of course possible to truncate further this model by setting either $m$ or $\sigma$ to zero. The first option gives rise to the model with a unique charged scalar in \cite{Gubser:2009qm}, which corresponds to our example 6.\footnote{It is possible to enrich this model keeping $\alpha$ in addition.}
+
+Finally, it is of course consistent to switch off the complete set of charged scalars and keep the neutral ones $\alpha$ and $\beta$. The resulting model is our example 8 above.
+

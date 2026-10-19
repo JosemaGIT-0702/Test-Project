@@ -1,0 +1,32 @@
+# Builds the paper and runs Python tests/calculations on every push.
+# Mathematica is not available in CI: .wl outputs (results/, paper/generated/) are committed.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync
+      - run: uv run ruff check calc/python tools
+      - run: uv run ruff format --check calc/python tools
+      - run: uv run pytest -q
+      - run: LANGS=py tools/run-calcs.sh
+
+  paper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          working_directory: paper
+      - uses: actions/upload-artifact@v7
+        with:
+          name: paper
+          path: paper/main.pdf
